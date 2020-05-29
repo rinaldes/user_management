@@ -1,0 +1,104 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #248e7b;
+  min-height: 8vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.konten {
+  margin-top: -246px;
+  margin-left: 220px;
+  background-color: #fcfcfc;
+}
+
+.vl{
+  border-left: 1px solid gainsboro;
+  height: 580px;
+  margin-left: 180px;
+  margin-top: -30px;
+  display: inline;
+  position: fixed;
+}
+
+.head {
+  font-weight: bold;
+  font-size: 27px;
+}
+
+.table-head{
+  font-weight: lighter;
+}
+
+hr{
+  width: 10%;
+  margin: 0;
+  border-color: #f9f9f9;
+}
+
+.tambah{
+  background-color: #248e7b;
+  color: white;
+  margin-right: 70px;
+  margin-top: -55px;
+  display: inline;
+  float: right;
+}
+
+.edit{
+  background-color: #248e7b;
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.search{
+  float: right;
+  margin-right: 170px;
+  margin-top: -55px;
+  display: inline;
+}
+
+.Profil{
+  color: white;
+  padding-left: 900px;
+}
+
+.sidebar{
+  padding-left: 35px;
+  padding-top: 30px;
+  border: 1;
+}
+
+li{
+  list-style-type: none;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
