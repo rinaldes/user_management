@@ -1,103 +1,114 @@
 import React from 'react';
 import logo from './picture/logo.PNG';
 import './App.css';
-
+import { Table, Button, Grid, Segment, Input, Header, List } from 'semantic-ui-react';
 
 var user_list = []
 
-user_list.push({nama: "Rudi Berjaya Subroto", username: "rudibs17", email: "rudisubroto@gmail.com", admin: "no", status: "aktif"})
-user_list.push({nama: "Rudi Berjaya Subroto", username: "rudibs17", email: "rudisubroto@gmail.com", admin: "yes", status: "tidak aktif"})
+user_list.push({ nama: "Budi Markodi", username: "budi007", email: "budi@gmail.com", admin: "yes", status: "aktif" })
+user_list.push({ nama: "Albert Ahmadi", username: "ahmadi99", email: "ahmadi@gmail.com", admin: "no", status: "tidak aktif" })
+user_list.push({ nama: "Soni Moni", username: "moni88", email: "moni@gmail.com", admin: "no", status: "aktif" })
 
-export class View extends React.Component{
-
-}
-
-function Header() {
+function Headbar() {
   return (
-    <div className="Header">
-      <header className="App-header">
-      </header> 
+    <div>
     </div>
   );
 }
 
 function Sidebar() {
   return (
-    <div className="sidebar">
-      <div className="vl"></div>
-      <img src={logo}></img>
-      <br/>
-      <hr/>
-      <br/>
-      <nav>
-        <li>Org Management</li>
-        <li>User Management</li>
-        <li>Event</li>
-        <li>Corporate Contact</li>
-        <li>My Contact</li>
-      </nav> 
-    </div>    
+    <Grid centered>
+      <Grid.Row className="add-five-margin-top">
+        <Grid.Column width="8">
+          <img src={logo}></img>
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column width="10">
+          <List relaxed>
+            <List.Item icon="home" content="Org Management" />
+            <List.Item icon="users" content="User Management" />
+            <List.Item icon="users" content="Event" />
+            <List.Item icon="users" content="Corporate Contact" />
+            <List.Item icon="users" content="My Contact" />
+          </List>
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
   )
 }
-
 
 function Container() {
   return (
-    <div className="konten container-sm">
-      <br></br><br></br>
-      <div className="tabel card rounded">
-        <div className="card-body">
-        <p className="head panel-body">User List</p>
-        <input type="text" className="search form-control col-sm-2" placeholder="Search user here">
-        </input>
-        <a href="add.html" className="tambah btn">Add User</a>
-        <br/>
-        <table className="table">
-          <thead>
-            <tr>
-                <th scope="col">Nama</th>
-                <th scope="col">Username</th>
-                <th scope="col">Email</th>
-                <th scope="col">Admin</th>
-                <th scope="col">Status</th>
-                <th scope="col"></th>
-            </tr>
-          </thead>
-          {user_list.map(user => 
-            {
-            return(
-          <tbody>
-            <tr>
-            <td>{user.nama}</td>
-            <td>{user.username}</td>
-            <td>{user.email}</td>
-            {
-              (user.admin === "yes")
-              ? <td><font color="green">{user.admin}</font></td>
-              : <td><font color="red">{user.admin}</font></td>
-            }
-            {
-              (user.status === "aktif")
-              ? <td><font color="green">{user.status}</font></td>
-              : <td><font color="red">{user.status}</font></td>
-            }
-            <td><button className="edit btn">Edit</button></td>
-            </tr>
-          </tbody>
-            )
-            }
-            )}
-
-            
-        </table>
-        </div>
-      </div>
-    </div>
-  )
+    <Segment>
+      <Grid centered>
+        <Grid.Column width="14">
+          <Grid>
+            <Grid.Row className="add-five-margin-top">
+              <Grid.Column width="9" floated="left">
+                <Header as="h1">User List</Header>
+              </Grid.Column>
+              <Grid.Column width="7" floated="right">
+                <Grid>
+                  <Grid.Column width="10" className="fluid">
+                    <Input icon="search" placeholder="Search user here" />
+                  </Grid.Column>
+                  <Grid.Column width="6">
+                    <Button content="Add User" className="fluid" />
+                  </Grid.Column>
+                </Grid>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row className="add-eight-padding-top">
+              <Grid.Column>
+                <Table>
+                  <Table.Header className="add-five-padding-top">
+                    <Table.Row>
+                      <Table.HeaderCell>Nama</Table.HeaderCell>
+                      <Table.HeaderCell>Username</Table.HeaderCell>
+                      <Table.HeaderCell>Email</Table.HeaderCell>
+                      <Table.HeaderCell>Admin</Table.HeaderCell>
+                      <Table.HeaderCell>Status</Table.HeaderCell>
+                      <Table.HeaderCell></Table.HeaderCell>
+                    </Table.Row>
+                  </Table.Header>
+                  <Table.Body>
+                    {
+                      user_list.map(user => {
+                        return (
+                          <Table.Row>
+                            <Table.Cell>{user.nama}</Table.Cell>
+                            <Table.Cell>{user.username}</Table.Cell>
+                            <Table.Cell>{user.email}</Table.Cell>
+                            {
+                              (user.admin === "yes")
+                                ? <Table.Cell><font color="green">{user.admin}</font></Table.Cell>
+                                : <Table.Cell><font color="red">{user.admin}</font></Table.Cell>
+                            }
+                            {
+                              (user.status === "aktif")
+                                ? <Table.Cell><font color="green">{user.status}</font></Table.Cell>
+                                : <Table.Cell><font color="red">{user.status}</font></Table.Cell>
+                            }
+                            <Table.Cell><Button color="green" className="fluid">Edit</Button></Table.Cell>
+                          </Table.Row>
+                        )
+                      })
+                    }
+                  </Table.Body>
+                </Table>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Grid.Column>
+      </Grid>
+    </Segment>
+  );
 }
 
 export {
-  Sidebar, Container 
+  Sidebar, Container
 }
 
-export default Header;
+export default Headbar;
