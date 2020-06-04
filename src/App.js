@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './picture/logo.PNG';
 import './App.css';
-import { Table, Button, Grid, Segment, Input, Header, List } from 'semantic-ui-react';
+import { Table, Button, Grid, Segment, Input, Header, List, Form, Checkbox } from 'semantic-ui-react';
 
 var user_list = []
 
@@ -47,6 +47,9 @@ function Content() {
   }
 }
 
+// Halaman
+
+// Create user
 function CreateUser() {
   return (
     <Segment>
@@ -60,7 +63,54 @@ function CreateUser() {
             </Grid.Row>
             <Grid.Row className="add-eight-padding-top">
               <Grid.Column>
+                <Grid>
+                  <Grid.Column width="10">
+                    <Form>
+                      <Form.Field>
+                        <Grid>
+                          <Grid.Column width="12">
+                            <label>Admin</label>
+                            <input placeholder='Last Name' />
+                          </Grid.Column>
+                          <Grid.Column width="4">
+                            <label>Sync LDAP</label><br />
+                            <Checkbox toggle />
+                          </Grid.Column>
+                        </Grid>
+                        <label>Email *</label>
+                        <input placeholder='First Name' />
+                      </Form.Field>
+                      <Form.Field>
+                        <label>Full Name *</label>
+                        <input placeholder='Last Name' />
+                      </Form.Field>
+                      <Form.Field>
+                        <label>Corporate Contact</label>
+                        <input placeholder='Last Name' />
+                      </Form.Field>
+                      <Form.Field>
+                        <Grid>
+                          <Grid.Column width="8">
+                            <label>Admin</label>
+                            <input placeholder='Last Name' />
+                          </Grid.Column>
+                          <Grid.Column width="8">
+                            <label>Active Status</label><br />
+                            <Checkbox toggle />
+                          </Grid.Column>
+                        </Grid>
+                      </Form.Field>
+                      <Button type='submit'>Save</Button>
+                    </Form>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Grid centered>
+                      <Grid.Column width="12">
 
+                      </Grid.Column>
+                    </Grid>
+                  </Grid.Column>
+                </Grid>
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -70,6 +120,7 @@ function CreateUser() {
   );
 }
 
+// View User
 function Container() {
   return (
     <Segment>
