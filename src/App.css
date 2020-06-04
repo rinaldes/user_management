@@ -1,15 +1,4 @@
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.edit{
+.ui.button.green-button{
   background-color: #248e7b;
   color: white;
-}
-
-.sidebar{
-  padding-left: 35px;
-  padding-top: 30px;
-  border: 1;
 }

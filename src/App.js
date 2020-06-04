@@ -55,7 +55,7 @@ function Container() {
                     <Input icon="search" placeholder="Search user here" />
                   </Grid.Column>
                   <Grid.Column width="6">
-                    <Button content="Add User" className="fluid" />
+                    <Button content="Add User" className="fluid green-button" />
                   </Grid.Column>
                 </Grid>
               </Grid.Column>
@@ -91,7 +91,7 @@ function Container() {
                                 ? <Table.Cell><font color="green">{user.status}</font></Table.Cell>
                                 : <Table.Cell><font color="red">{user.status}</font></Table.Cell>
                             }
-                            <Table.Cell><Button color="green" className="fluid">Edit</Button></Table.Cell>
+                            <Table.Cell><Button className="fluid green-button">Edit</Button></Table.Cell>
                           </Table.Row>
                         )
                       })
