@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'semantic-ui-css/semantic.min.css'
 import './index.css';
-import Headbar, { Sidebar, Container } from './App';
+import Headbar, { Sidebar, Content } from './App';
 import { Grid } from 'semantic-ui-react';
 import * as serviceWorker from './serviceWorker';
 
@@ -25,7 +25,7 @@ class Application extends React.Component {
           <Grid.Column className="add-ten-padding-top app-content">
             <Grid centered>
               <Grid.Column width="14">
-                <Container />
+                <Content />
               </Grid.Column>
             </Grid>
           </Grid.Column>

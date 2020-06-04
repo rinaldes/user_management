@@ -39,6 +39,37 @@ function Sidebar() {
   )
 }
 
+function Content() {
+  if (window.location.pathname === "/create") {
+    return (<CreateUser />)
+  } else {
+    return (<Container />)
+  }
+}
+
+function CreateUser() {
+  return (
+    <Segment>
+      <Grid centered>
+        <Grid.Column width="14">
+          <Grid>
+            <Grid.Row className="add-five-margin-top">
+              <Grid.Column width="9" floated="left">
+                <Header as="h1">Add User</Header>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row className="add-eight-padding-top">
+              <Grid.Column>
+
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Grid.Column>
+      </Grid>
+    </Segment>
+  );
+}
+
 function Container() {
   return (
     <Segment>
@@ -55,7 +86,9 @@ function Container() {
                     <Input icon="search" placeholder="Search user here" />
                   </Grid.Column>
                   <Grid.Column width="6">
-                    <Button content="Add User" className="fluid green-button" />
+                    <a href="/create">
+                      <Button content="Add User" className="fluid green-button" />
+                    </a>
                   </Grid.Column>
                 </Grid>
               </Grid.Column>
@@ -108,7 +141,7 @@ function Container() {
 }
 
 export {
-  Sidebar, Container
+  Sidebar, Content
 }
 
 export default Headbar;
