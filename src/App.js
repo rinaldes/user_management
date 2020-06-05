@@ -1,13 +1,22 @@
 import React from 'react';
 import logo from './picture/logo.PNG';
+import photos from './picture/upload-photo.jpg';
 import './App.css';
-import { Table, Button, Grid, Segment, Input, Header, List, Form, Checkbox } from 'semantic-ui-react';
+import { Table, Button, Grid, Segment, Input, Header, List, Form, Checkbox, Dropdown } from 'semantic-ui-react';
 
-var user_list = []
-
-user_list.push({ nama: "Budi Markodi", username: "budi007", email: "budi@gmail.com", admin: "yes", status: "aktif" })
-user_list.push({ nama: "Albert Ahmadi", username: "ahmadi99", email: "ahmadi@gmail.com", admin: "no", status: "tidak aktif" })
-user_list.push({ nama: "Soni Moni", username: "moni88", email: "moni@gmail.com", admin: "no", status: "aktif" })
+const roleList = [
+  { key: 'admin', value: 'Admin', text: 'Admin' },
+  { key: 'engineer', value: 'Engineer', text: 'Engineer' },
+  { key: 'designer', value: 'Designer', text: 'Designer' },
+  { key: 'marketing', value: 'Marketing', text: 'Marketing' },
+  { key: 'tester', value: 'Tester', text: 'Tester' },
+]
+const contactList = [
+  { key: 'Email', value: 'Email', text: 'Email' },
+  { key: 'Work Phone', value: 'Work Phone', text: 'Work Phone' },
+  { key: 'Fax', value: 'Fax', text: 'Fax' },
+  { key: 'Phone', value: 'Phone', text: 'Phone' },
+]
 
 function Headbar() {
   return (
@@ -69,30 +78,40 @@ function CreateUser() {
                       <Form.Field>
                         <Grid>
                           <Grid.Column width="12">
-                            <label>Admin</label>
-                            <input placeholder='Last Name' />
+                            <label>Email *</label>
+                            <input placeholder="Enter user company email" />
                           </Grid.Column>
                           <Grid.Column width="4">
                             <label>Sync LDAP</label><br />
                             <Checkbox toggle />
                           </Grid.Column>
                         </Grid>
-                        <label>Email *</label>
-                        <input placeholder='First Name' />
                       </Form.Field>
                       <Form.Field>
                         <label>Full Name *</label>
-                        <input placeholder='Last Name' />
+                        <input placeholder='Enter fullname' />
                       </Form.Field>
                       <Form.Field>
                         <label>Corporate Contact</label>
-                        <input placeholder='Last Name' />
+                        <Dropdown
+                          placeholder='Choose Corporate Contact'
+                          fluid
+                          search
+                          selection
+                          options={contactList}
+                        />
                       </Form.Field>
                       <Form.Field>
                         <Grid>
                           <Grid.Column width="8">
                             <label>Admin</label>
-                            <input placeholder='Last Name' />
+                            <Dropdown
+                              placeholder='Choose Role'
+                              fluid
+                              search
+                              selection
+                              options={roleList}
+                            />
                           </Grid.Column>
                           <Grid.Column width="8">
                             <label>Active Status</label><br />
@@ -105,8 +124,8 @@ function CreateUser() {
                   </Grid.Column>
                   <Grid.Column>
                     <Grid centered>
-                      <Grid.Column width="12">
-
+                      <Grid.Column width="8">
+                        <img src={photos} />
                       </Grid.Column>
                     </Grid>
                   </Grid.Column>

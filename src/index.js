@@ -12,6 +12,7 @@ class Application extends React.Component {
     user_list: []
   }
 
+  // API Code
   getUser() {
     fetch('https://api.relier.works/restricted/orgs/br6i53e6uiekoele1qdg/contacts?limit=10', {
       headers: {
@@ -27,6 +28,26 @@ class Application extends React.Component {
         })
       })
       .catch(err => console.log(err));
+  }
+
+  postUser() {
+    const createUser = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(
+        {
+          FullName: "John Doe Lokshumwe",
+          Email: "john.doe@example.com",
+          Picture: "pciture.png",
+          JobRole: "manager",
+          JobDivision: "development",
+          OrganizationUID: "br8vma6344r9q4vvuofg"
+        }
+      )
+    };
+    fetch('https://api.relier.works/restricted/orgs/br6i53e6uiekoele1qdg/contacts', createUser)
+      .then(response => response.json())
+      .then(data => this.setState({ postId: data.id }));
   }
 
   render() {
