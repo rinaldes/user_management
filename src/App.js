@@ -81,7 +81,7 @@ function CreateUser(props) {
                         <Grid>
                           <Grid.Column width="12">
                             <label>Email *</label>
-                            <input placeholder="Enter user company email" />
+                            <input placeholder="Enter user company email" value={(window.location.pathname === "/create") ? null : props.Email} />
                           </Grid.Column>
                           <Grid.Column width="4">
                             <label>Sync LDAP</label><br />
@@ -197,7 +197,7 @@ function Container(props) {
                                 : <Table.Cell><font color="red">Tidak</font></Table.Cell>
                             }
                             <Table.Cell>
-                              <a href={"/edit?id=" + user.UID}>
+                              <a href={"/edit?" + user.UID}>
                                 <Button className="fluid green-button">Edit</Button>
                               </a>
                             </Table.Cell>
