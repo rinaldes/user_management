@@ -39,11 +39,11 @@ function Sidebar() {
   )
 }
 
-function Content() {
+function Content(props) {
   if (window.location.pathname === "/create") {
     return (<CreateUser />)
   } else {
-    return (<Container />)
+    return (<Container user_list={props.user_list} />)
   }
 }
 
@@ -121,7 +121,7 @@ function CreateUser() {
 }
 
 // View User
-function Container() {
+function Container(props) {
   return (
     <Segment>
       <Grid centered>
@@ -159,10 +159,10 @@ function Container() {
                   </Table.Header>
                   <Table.Body>
                     {
-                      user_list.map(user => {
+                      props.user_list.map(user => {
                         return (
                           <Table.Row>
-                            <Table.Cell>{user.nama}</Table.Cell>
+                            <Table.Cell>{user.fullname}</Table.Cell>
                             <Table.Cell>{user.username}</Table.Cell>
                             <Table.Cell>{user.email}</Table.Cell>
                             {

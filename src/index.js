@@ -8,7 +8,31 @@ import { Grid } from 'semantic-ui-react';
 import * as serviceWorker from './serviceWorker';
 
 class Application extends React.Component {
+  state = {
+    user_list: []
+  }
+
+  getUser() {
+    fetch('https://api.relier.works/restricted/orgs/br6i53e6uiekoele1qdg/contacts?limit=10', {
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json)
+        this.setState({
+          user_list: [json],
+          isLoaded: true,
+        })
+      })
+      .catch(err => console.log(err));
+  }
+
   render() {
+    this.getUser();
     return (
       <Grid className="no-padding">
 
@@ -25,7 +49,7 @@ class Application extends React.Component {
           <Grid.Column className="add-ten-padding-top app-content">
             <Grid centered>
               <Grid.Column width="14">
-                <Content />
+                <Content user_list={this.state.user_list} />
               </Grid.Column>
             </Grid>
           </Grid.Column>
