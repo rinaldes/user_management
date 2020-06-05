@@ -22,10 +22,8 @@ class Application extends React.Component {
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json)
         this.setState({
-          user_list: [json],
-          isLoaded: true,
+          user_list: json.Data,
         })
       })
       .catch(err => console.log(err));
@@ -33,6 +31,9 @@ class Application extends React.Component {
 
   render() {
     this.getUser();
+    this.state.user_list.map(user => {
+      console.log(user)
+    })
     return (
       <Grid className="no-padding">
 

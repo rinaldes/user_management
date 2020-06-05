@@ -161,19 +161,19 @@ function Container(props) {
                     {
                       props.user_list.map(user => {
                         return (
-                          <Table.Row>
-                            <Table.Cell>{user.fullname}</Table.Cell>
-                            <Table.Cell>{user.username}</Table.Cell>
-                            <Table.Cell>{user.email}</Table.Cell>
+                          < Table.Row >
+                            <Table.Cell>{user.FullName}</Table.Cell>
+                            <Table.Cell>{user.Username}</Table.Cell>
+                            <Table.Cell>{user.Email}</Table.Cell>
                             {
-                              (user.admin === "yes")
-                                ? <Table.Cell><font color="green">{user.admin}</font></Table.Cell>
-                                : <Table.Cell><font color="red">{user.admin}</font></Table.Cell>
+                              (user.JobDivision === "Admin")
+                                ? <Table.Cell><font color="green">Ya</font></Table.Cell>
+                                : <Table.Cell><font color="red">Bukan</font></Table.Cell>
                             }
                             {
-                              (user.status === "aktif")
-                                ? <Table.Cell><font color="green">{user.status}</font></Table.Cell>
-                                : <Table.Cell><font color="red">{user.status}</font></Table.Cell>
+                              (user.DeletedAt === "aktif")
+                                ? <Table.Cell><font color="green">Ya</font></Table.Cell>
+                                : <Table.Cell><font color="red">Tidak</font></Table.Cell>
                             }
                             <Table.Cell><Button className="fluid green-button">Edit</Button></Table.Cell>
                           </Table.Row>
@@ -187,7 +187,7 @@ function Container(props) {
           </Grid>
         </Grid.Column>
       </Grid>
-    </Segment>
+    </Segment >
   );
 }
 
