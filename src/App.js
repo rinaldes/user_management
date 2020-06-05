@@ -51,6 +51,8 @@ function Sidebar() {
 function Content(props) {
   if (window.location.pathname === "/create") {
     return (<CreateUser />)
+  } else if (window.location.pathname === "/edit") {
+    return (<CreateUser user_list={props.user_list} />)
   } else {
     return (<Container user_list={props.user_list} />)
   }
@@ -59,7 +61,7 @@ function Content(props) {
 // Halaman
 
 // Create user
-function CreateUser() {
+function CreateUser(props) {
   return (
     <Segment>
       <Grid centered>
@@ -67,7 +69,7 @@ function CreateUser() {
           <Grid>
             <Grid.Row className="add-five-margin-top">
               <Grid.Column width="9" floated="left">
-                <Header as="h1">Add User</Header>
+                <Header as="h1">{(window.location.pathname === "/create") ? "Add" : "Edit"} User</Header>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row className="add-eight-padding-top">
@@ -194,7 +196,11 @@ function Container(props) {
                                 ? <Table.Cell><font color="green">Ya</font></Table.Cell>
                                 : <Table.Cell><font color="red">Tidak</font></Table.Cell>
                             }
-                            <Table.Cell><Button className="fluid green-button">Edit</Button></Table.Cell>
+                            <Table.Cell>
+                              <a href={"/edit?id=" + user.UID}>
+                                <Button className="fluid green-button">Edit</Button>
+                              </a>
+                            </Table.Cell>
                           </Table.Row>
                         )
                       })
