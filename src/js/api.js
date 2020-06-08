@@ -17,33 +17,11 @@ class Api extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    fetch("https://api.relier.works/restricted/orgs/br6i53e6uiekoele1qdg/contacts", {
-      "method": "GET",
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(response => {
-        this.setState({
-          user_list: (response.Data !== undefined) ? response.Data : []
-        })
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    console.log(this.state.user_list.length);
-    if (this.state.user_list !== undefined) {
-      user_list_var.data = this.state.user_list
-    }
-  }
+  
 
   create(e) {
     e.preventDefault();
-    fetch("https://api.relier.works/restricted/orgs/br6i53e6uiekoele1qdg/contacts", {
+    fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users", {
       "method": "POST",
       "headers": {
         Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
@@ -54,7 +32,7 @@ class Api extends React.Component {
         FullName: this.state.FullName,
         Email: this.state.Email,
         UserUID: this.state.id,
-        OrganizationUID: makeid(20),
+        OrganizationUID: "breerje6uiensniapev0",
         JobRole: this.state.JobRole,
         JobDivision: this.state.JobDivision
       })
@@ -70,7 +48,7 @@ class Api extends React.Component {
 
   update(e) {
     e.preventDefault();
-    fetch("https://api.relier.works/restricted/orgs/br6i53e6uiekoele1qdg/contacts", {
+    fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users/brev6le6uiesh55v358g", {
       "method": "PUT",
       "headers": {
         Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
@@ -115,16 +93,6 @@ class Api extends React.Component {
   handleChange(changeObject) {
     this.setState(changeObject)
   }
-}
-
-function makeid(length) {
-  var result = '';
-  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
 }
 
 export default Api;
