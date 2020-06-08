@@ -1,6 +1,7 @@
 import photos from '../../../picture/upload-photo.jpg';
 import { Button, Grid, Segment, Header, Form, Checkbox, Dropdown } from 'semantic-ui-react';
 import React from 'react';
+import postUser from './post_user.js';
 
 const roleList = [
   { key: 'admin', value: 'Admin', text: 'Admin' },
@@ -76,7 +77,7 @@ function CreateUser(props) {
                           </Grid.Column>
                         </Grid>
                       </Form.Field>
-                      <Button type='submit'>Save</Button>
+                      <Button type='submit' onClick={() => postUser()}>Save</Button>
                     </Form>
                   </Grid.Column>
                   <Grid.Column>
