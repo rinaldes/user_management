@@ -47,7 +47,7 @@ function CreateUser(props) {
                       </Form.Field>
                       <Form.Field>
                         <label>Full Name *</label>
-                        <input placeholder='Enter fullname' />
+                        <input placeholder='Enter fullname' value={(window.location.pathname === "/create") ? null : props.FullName} />
                       </Form.Field>
                       <Form.Field>
                         <label>Corporate Contact</label>
@@ -69,6 +69,7 @@ function CreateUser(props) {
                               search
                               selection
                               options={roleList}
+                              value={(window.location.pathname === "/create") ? null : props.roleList}
                             />
                           </Grid.Column>
                           <Grid.Column width="8">
