@@ -5,6 +5,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Component */
 .app-headbar {
   background-color: #248e7b;
   min-height: 10vh;
@@ -22,6 +23,7 @@ body {
   min-height: 100vh;
 }
 
+/* Layouting */
 .no-padding{
   padding: 0% !important;
 }
