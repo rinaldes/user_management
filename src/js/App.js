@@ -7,7 +7,8 @@ import { Grid } from 'semantic-ui-react';
 
 class Application extends React.Component {
   state = {
-    user_list: []
+    user_list: [],
+    get_api_done: false
   }
 
   // API Code
@@ -26,33 +27,37 @@ class Application extends React.Component {
         })
       })
       .catch(err => console.log(err));
+    this.state.get_api_done = true;
   }
 
   postUser() {
-    const createUser = {
+    fetch('https://api.relier.works/restricted/orgs/breerje6uiensniapev0/contacts', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(
-        {
-          FullName: "John Doe Lokshumwe",
-          Email: "john.doe@example.com",
-          Picture: "pciture.png",
-          JobRole: "manager",
-          JobDivision: "development",
-          OrganizationUID: "br8vma6344r9q4vvuofg"
-        }
-      )
-    };
-    fetch('https://api.relier.works/restricted/orgs/br6i53e6uiekoele1qdg/contacts', createUser)
-      .then(response => response.json())
-      .then(data => this.setState({ postId: data.id }));
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        FullName: "John Doe Lokshumwe",
+        Email: "john.doe@example.com",
+        JobRole: "manager",
+        JobDivision: "development",
+        OrganizationUID: "br8vma6344r9q4vvuofg"
+      })
+    })
   }
 
   render() {
+    if (this.state.get_api_done === false) {
+      this.getUser();
+    }
     if (this.state.user_list !== undefined) {
       this.state.user_list.map(user => {
         console.log(user)
       })
+    }
+    else {
+      this.state.user_list = [];
     }
     return (
       <Grid className="no-padding">
