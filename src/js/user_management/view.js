@@ -2,6 +2,24 @@ import { Table, Button, Grid, Segment, Input, Header } from 'semantic-ui-react';
 import React from 'react';
 
 function Container(props) {
+  const handleClick = userUId => {
+    const requestOptions = {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    };
+    fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users/" + userUId, requestOptions).then((response) => {
+      return response.json();
+    })
+    console.log("terhapus");
+    setTimeout(function () { //Start the timer
+      window.location.reload()
+    }.bind(this), 400)
+  }
+
   return (
     <Segment>
       <Grid centered>
@@ -60,7 +78,7 @@ function Container(props) {
                                 <Button className="fluid green-button">Edit</Button>
                               </a>
                               <br />
-                              <Button className="fluid" color="red">Hapus</Button>
+                              <Button className="fluid" color="red" onClick={() => { handleClick(user.UID) }} >Hapus</Button>
                             </Table.Cell>
                           </Table.Row>
                         )
@@ -76,7 +94,5 @@ function Container(props) {
     </Segment >
   );
 }
-
-
 
 export default Container;
