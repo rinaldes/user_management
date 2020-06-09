@@ -1,9 +1,8 @@
 import React from 'react';
 import '../css/App.css';
-import Headbar from './user_management/heabar';
-import Sidebar from './user_management/sidebar';
-import Content from './user_management/content';
-import Api, { user_list_var } from './api';
+import Headbar from './layout/heabar';
+import Sidebar from './layout/sidebar';
+import Content from './layout/content';
 import { Grid } from 'semantic-ui-react';
 
 class Application extends React.Component {

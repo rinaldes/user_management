@@ -1,6 +1,6 @@
 import React from 'react';
-import CreateUser from './content/create.js'
-import Container from './content/view.js'
+import CreateUser from '../user_management/create.js'
+import Container from '../user_management/view.js'
 
 function Content(props) {
     if (window.location.pathname === "/create") {
@@ -11,5 +11,6 @@ function Content(props) {
         return (<Container user_list={props.user_list} />)
     }
 }
+
 
 export default Content;

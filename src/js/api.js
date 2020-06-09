@@ -17,8 +17,6 @@ class Api extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  
-
   create(e) {
     e.preventDefault();
     fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users", {
@@ -48,7 +46,7 @@ class Api extends React.Component {
 
   update(e) {
     e.preventDefault();
-    fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users/brev6le6uiesh55v358g", {
+    fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users/${this.state.id}", {
       "method": "PUT",
       "headers": {
         Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
