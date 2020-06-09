@@ -2,6 +2,7 @@ import photos from '../../picture/upload-photo.jpg';
 import { Button, Grid, Segment, Header, Form, Checkbox, Dropdown } from 'semantic-ui-react';
 import React from 'react';
 
+
 class CreateUser extends React.Component {
   constructor(props) {
     super(props);
@@ -9,29 +10,20 @@ class CreateUser extends React.Component {
       contactListAPI: [],
       contactList: [],
       get_done: false,
-      data_user: {
-        email: "",
-        fullname: "",
-        corporate: "",
-        jobrole: "",
-        is_active: false
-      },
       email: "",
       fullname: "",
       corporate: "",
-      jobrole: "",
-      is_active: false,
+      jobrole: false,
+      is_active: null,
       roleList: [
-        { key: 'admin', value: 'Admin', text: 'Admin' },
-        { key: 'engineer', value: 'Engineer', text: 'Engineer' },
-        { key: 'designer', value: 'Designer', text: 'Designer' },
-        { key: 'marketing', value: 'Marketing', text: 'Marketing' },
-        { key: 'tester', value: 'Tester', text: 'Tester' },
+        { key: 'Ya', value: true, text: 'Ya' },
+        { key: 'Bukan', value: false, text: 'Bukan' },
       ]
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
 
   // Get Contact Data
   GetContact() {
@@ -58,8 +50,31 @@ class CreateUser extends React.Component {
   }
 
   // Proses Save
-  handleSubmit(event) {
-
+  handleSubmit() {
+    fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users", {
+      "method": "POST",
+      "headers": {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        FullName: this.state.fullname,
+        Email: this.state.email,
+        IsAdministrator: this.state.jobrole,
+        IsActive: this.state.is_active,
+        OrganizationUID: this.state.corporate,
+        Username: this.state.email,
+        NickName: this.state.fullname.substring(0, 4),
+        Picture: "foto.png",
+        Status: "",
+        IsOnline: false,
+        IsIdle: false,
+        IsOnCall: false,
+        LastOnlineAt: "0001-01-01T00:00:00Z"
+      })
+    })
+    window.location.replace("/");
   }
 
   handleChange(event) {
@@ -71,29 +86,12 @@ class CreateUser extends React.Component {
       this.setState({
         fullname: event.target.value
       });
-    } else if (event.target.id === "role") {
-      this.setState({
-        jobrole: event.target.value
-      });
-    } else if (event.target.id === "corporate_contact") {
-      this.setState({
-        corporate: event.target.value
-      });
     } else if (event.target.id === "is_active") {
       this.setState({
         is_active: !this.state.is_active
       });
     }
-    this.setState({
-      data_user: {
-        is_active: this.state.is_active,
-        email: this.state.email,
-        fullname: this.state.fullname,
-        jobrole: this.state.jobrole,
-        corporate: this.state.corporate
-      }
-    });
-    console.log(this.state.data_user)
+    console.log(this.state.jobrole)
   }
 
   handleChangeRole = (e, { value }) => {
@@ -101,30 +99,13 @@ class CreateUser extends React.Component {
     this.setState({
       jobrole: value
     });
-    this.setState({
-      data_user: {
-        is_active: this.state.is_active,
-        email: this.state.email,
-        fullname: this.state.fullname,
-        jobrole: this.state.jobrole,
-        corporate: this.state.corporate
-      }
-    });
+    console.log(this.state.jobrole)
   };
 
   handleChangeContact = (e, { value }) => {
     e.persist();
     this.setState({
       corporate: value
-    });
-    this.setState({
-      data_user: {
-        is_active: this.state.is_active,
-        email: this.state.email,
-        fullname: this.state.fullname,
-        jobrole: this.state.jobrole,
-        corporate: this.state.corporate
-      }
     });
   };
 
@@ -195,6 +176,7 @@ class CreateUser extends React.Component {
                                 selection
                                 options={this.state.roleList}
                                 onChange={this.handleChangeRole}
+                                value={this.state.jobrole}
                               />
                             </Grid.Column>
                             <Grid.Column width="8">

@@ -46,12 +46,12 @@ function Container(props) {
                             <Table.Cell>{user.Username}</Table.Cell>
                             <Table.Cell>{user.Email}</Table.Cell>
                             {
-                              (user.JobDivision === "Admin")
+                              (user.IsAdministrator)
                                 ? <Table.Cell><font color="green">Ya</font></Table.Cell>
                                 : <Table.Cell><font color="red">Bukan</font></Table.Cell>
                             }
                             {
-                              (user.DeletedAt === "aktif")
+                              (user.IsActive)
                                 ? <Table.Cell><font color="green">Ya</font></Table.Cell>
                                 : <Table.Cell><font color="red">Tidak</font></Table.Cell>
                             }

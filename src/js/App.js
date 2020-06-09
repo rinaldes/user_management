@@ -14,7 +14,7 @@ class Application extends React.Component {
     };
   }
   componentDidMount() {
-    fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users?limit=10", {
+    fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users?limit=100", {
       "method": "GET",
       headers: {
         Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
