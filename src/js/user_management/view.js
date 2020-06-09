@@ -59,6 +59,8 @@ function Container(props) {
                               <a href={"/edit?code=" + user.UID}>
                                 <Button className="fluid green-button">Edit</Button>
                               </a>
+                              <br />
+                              <Button className="fluid" color="red">Hapus</Button>
                             </Table.Cell>
                           </Table.Row>
                         )
@@ -74,5 +76,7 @@ function Container(props) {
     </Segment >
   );
 }
+
+
 
 export default Container;
