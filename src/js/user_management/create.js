@@ -85,29 +85,55 @@ class CreateUser extends React.Component {
 
   // Proses Save
   handleSubmit() {
-    fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users", {
-      "method": "POST",
-      "headers": {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        FullName: this.state.fullname,
-        Email: this.state.email,
-        IsAdministrator: this.state.jobrole,
-        IsActive: this.state.is_active,
-        OrganizationUID: this.state.corporate,
-        Username: this.state.email,
-        NickName: this.state.fullname.substring(0, 4),
-        Picture: "foto.png",
-        Status: "",
-        IsOnline: false,
-        IsIdle: false,
-        IsOnCall: false,
-        LastOnlineAt: "0001-01-01T00:00:00Z"
+    if (window.location.pathname === "/create") {
+      fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users", {
+        "method": "POST",
+        "headers": {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          FullName: this.state.fullname,
+          Email: this.state.email,
+          IsAdministrator: this.state.jobrole,
+          IsActive: this.state.is_active,
+          OrganizationUID: this.state.corporate,
+          Username: this.state.email,
+          NickName: this.state.fullname.substring(0, 4),
+          Picture: "foto.png",
+          Status: "",
+          IsOnline: false,
+          IsIdle: false,
+          IsOnCall: false,
+          LastOnlineAt: "0001-01-01T00:00:00Z"
+        })
       })
-    })
+    } else if (window.location.pathname === "/edit") {
+      fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users/" + this.state.code, {
+        "method": "PUT",
+        "headers": {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          FullName: this.state.fullname,
+          Email: this.state.email,
+          IsAdministrator: this.state.jobrole,
+          IsActive: this.state.is_active,
+          OrganizationUID: this.state.corporate,
+          Username: this.state.email,
+          NickName: this.state.fullname.substring(0, 4),
+          Picture: "foto.png",
+          Status: "",
+          IsOnline: false,
+          IsIdle: false,
+          IsOnCall: false,
+          LastOnlineAt: "0001-01-01T00:00:00Z"
+        })
+      })
+    }
     window.location.replace("/");
   }
 
