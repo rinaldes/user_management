@@ -32,7 +32,6 @@ class Application extends React.Component {
       .catch(err => {
         console.log(err);
       });
-    console.log(this.state.user_list.length);
   }
 
   render() {

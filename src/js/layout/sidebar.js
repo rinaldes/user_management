@@ -11,7 +11,7 @@ function Sidebar() {
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-                <Grid.Column width="10">
+                <Grid.Column width="12">
                     <List relaxed>
                         <List.Item icon="home" content="Org Management" />
                         <List.Item icon="users" content="User Management" />

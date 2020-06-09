@@ -7,14 +7,18 @@ class CreateUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      code: props.user_list,
       contactListAPI: [],
       contactList: [],
       get_done: false,
+      get_done_user: false,
+      previous_uid: "",
       email: "",
       fullname: "",
       corporate: "",
       jobrole: false,
       is_active: null,
+      dataUser: {},
       roleList: [
         { key: 'Ya', value: true, text: 'Ya' },
         { key: 'Bukan', value: false, text: 'Bukan' },
@@ -37,16 +41,46 @@ class CreateUser extends React.Component {
       .then(res => res.json())
       .then(json => {
         this.state.contactListAPI = [json.Data]
-        console.log(this.state.contactListAPI)
         this.state.contactListAPI.map(contact => {
-          this.state.contactList.push({
-            key: contact.UID,
-            value: contact.UID,
-            text: contact.Title,
-          })
+          if (this.state.previous_uid !== contact.UID) {
+            this.state.contactList.push({
+              key: contact.UID,
+              value: contact.UID,
+              text: contact.Title,
+            })
+            this.state.previous_uid = contact.UID
+          }
         })
         this.state.get_done = true
       })
+  }
+
+  // Get User Data
+  GetUserData() {
+    fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users/" + this.state.code, {
+      "method": "GET",
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          dataUser: response.Data,
+          get_done_user: true
+        })
+        this.state.email = this.state.dataUser.Email
+        this.state.fullname = this.state.dataUser.FullName
+        this.state.corporate = "breerje6uiensniapev0"
+        this.state.jobrole = this.state.dataUser.IsAdministrator
+        this.state.is_active = this.state.dataUser.IsActive
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
   }
 
   // Proses Save
@@ -91,7 +125,6 @@ class CreateUser extends React.Component {
         is_active: !this.state.is_active
       });
     }
-    console.log(this.state.jobrole)
   }
 
   handleChangeRole = (e, { value }) => {
@@ -99,7 +132,6 @@ class CreateUser extends React.Component {
     this.setState({
       jobrole: value
     });
-    console.log(this.state.jobrole)
   };
 
   handleChangeContact = (e, { value }) => {
@@ -112,6 +144,9 @@ class CreateUser extends React.Component {
   render() {
     if (this.state.get_done === false) {
       this.GetContact();
+    }
+    if (this.state.get_done_user === false && window.location.pathname === "/edit") {
+      this.GetUserData();
     }
     return (
       <Segment>
@@ -136,6 +171,7 @@ class CreateUser extends React.Component {
                                 id="user_email"
                                 placeholder="Enter user company email"
                                 onChange={this.handleChange}
+                                value={this.state.email}
                               />
                             </Grid.Column>
                             <Grid.Column width="4">
@@ -150,6 +186,7 @@ class CreateUser extends React.Component {
                             id="fullname"
                             placeholder='Enter fullname'
                             onChange={this.handleChange}
+                            value={this.state.fullname}
                           />
                         </Form.Field>
                         <Form.Field>
@@ -162,6 +199,7 @@ class CreateUser extends React.Component {
                             selection
                             options={this.state.contactList}
                             onChange={this.handleChangeContact}
+                            value={this.state.corporate}
                           />
                         </Form.Field>
                         <Form.Field>
@@ -184,6 +222,7 @@ class CreateUser extends React.Component {
                               <Checkbox
                                 toggle id="is_active"
                                 onChange={this.handleChange}
+                                checked={this.state.is_active}
                               />
                             </Grid.Column>
                           </Grid>

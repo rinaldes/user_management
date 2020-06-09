@@ -56,7 +56,7 @@ function Container(props) {
                                 : <Table.Cell><font color="red">Tidak</font></Table.Cell>
                             }
                             <Table.Cell>
-                              <a href={"/edit?" + user.UID}>
+                              <a href={"/edit?code=" + user.UID}>
                                 <Button className="fluid green-button">Edit</Button>
                               </a>
                             </Table.Cell>
