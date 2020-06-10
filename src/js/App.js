@@ -3,6 +3,7 @@ import '../css/App.css';
 import Headbar from './layout/heabar';
 import Sidebar from './layout/sidebar';
 import Content from './layout/content';
+import LoginForm from './login_page/login';
 import { Grid } from 'semantic-ui-react';
 
 class Application extends React.Component {
@@ -38,30 +39,35 @@ class Application extends React.Component {
     if (this.state.get_done === false) {
       this.componentDidMount();
     }
-    return (
-      <Grid className="no-padding">
+    if (false) {
+      return (
+        <Grid className="no-padding">
 
-        <Grid.Row className="no-padding no-margin">
-          <Grid.Column width="16" className="app-headbar">
-            <Headbar />
-          </Grid.Column>
-        </Grid.Row>
+          <Grid.Row className="no-padding no-margin">
+            <Grid.Column width="16" className="app-headbar">
+              <Headbar />
+            </Grid.Column>
+          </Grid.Row>
 
-        <Grid.Row columns="equal" className="no-padding no-margin">
-          <Grid.Column width="3" className="app-sidebar">
-            <Sidebar />
-          </Grid.Column>
-          <Grid.Column className="add-ten-padding-top app-content">
-            <Grid centered>
-              <Grid.Column width="14">
-                <Content user_list={this.state.user_list} />
-              </Grid.Column>
-            </Grid>
-          </Grid.Column>
-        </Grid.Row>
+          <Grid.Row columns="equal" className="no-padding no-margin">
+            <Grid.Column width="3" className="app-sidebar">
+              <Sidebar />
+            </Grid.Column>
+            <Grid.Column className="add-ten-padding-top app-content">
+              <Grid centered>
+                <Grid.Column width="14">
+                  <Content user_list={this.state.user_list} />
+                </Grid.Column>
+              </Grid>
+            </Grid.Column>
+          </Grid.Row>
 
-      </Grid>
-    );
+        </Grid>
+      );
+    }
+    else {
+      return (<LoginForm />);
+    }
   }
 }
 
