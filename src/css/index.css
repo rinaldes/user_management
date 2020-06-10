@@ -23,6 +23,12 @@ body {
   min-height: 100vh;
 }
 
+/* Text */
+.white-text{
+  color: white;
+  font-weight: bold;
+}
+
 /* Layouting */
 .no-padding{
   padding: 0% !important;

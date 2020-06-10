@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Grid, Dropdown } from 'semantic-ui-react';
 import '../css/App.css';
+
 import Headbar from './layout/heabar';
 import Sidebar from './layout/sidebar';
 import Content from './layout/content';
-import LoginForm from './login_page/login';
-import { Grid } from 'semantic-ui-react';
+
+import { getToken, removeUserSession, setUserSession } from "./utils/API";
+import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
+import axios from 'axios';
+
 
 class Application extends React.Component {
   constructor(props) {
@@ -14,6 +19,11 @@ class Application extends React.Component {
       get_done: false
     };
   }
+  handleLogout = () => {
+    removeUserSession();
+    this.props.history.push('/login');
+  }
+
   componentDidMount() {
     fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users?limit=100", {
       "method": "GET",
@@ -39,35 +49,51 @@ class Application extends React.Component {
     if (this.state.get_done === false) {
       this.componentDidMount();
     }
-    if (false) {
-      return (
-        <Grid className="no-padding">
 
-          <Grid.Row className="no-padding no-margin">
-            <Grid.Column width="16" className="app-headbar">
-              <Headbar />
-            </Grid.Column>
-          </Grid.Row>
+    return (
+      <Grid className="no-padding">
 
-          <Grid.Row columns="equal" className="no-padding no-margin">
-            <Grid.Column width="3" className="app-sidebar">
-              <Sidebar />
-            </Grid.Column>
-            <Grid.Column className="add-ten-padding-top app-content">
+        <Grid.Row className="no-padding no-margin">
+          <Grid.Column width="16" className="app-headbar">
+            <div>
               <Grid centered>
-                <Grid.Column width="14">
-                  <Content user_list={this.state.user_list} />
+                <Grid.Column width="4" floated="right" className="add-five-margin-top">
+                  <span>
+                    <Dropdown text='Hipe Indonesia' className="white-text">
+                      <Dropdown.Menu>
+                        <Dropdown.Item text=' ' />
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </span>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <span>
+                    <Dropdown text='Mr Ahmad' className="white-text">
+                      <Dropdown.Menu>
+                        <Dropdown.Item text='Logout' onClick={this.handleLogout} />
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </span>
                 </Grid.Column>
               </Grid>
-            </Grid.Column>
-          </Grid.Row>
+            </div>
+          </Grid.Column>
+        </Grid.Row>
 
-        </Grid>
-      );
-    }
-    else {
-      return (<LoginForm />);
-    }
+        <Grid.Row columns="equal" className="no-padding no-margin">
+          <Grid.Column width="3" className="app-sidebar">
+            <Sidebar />
+          </Grid.Column>
+          <Grid.Column className="add-ten-padding-top app-content">
+            <Grid centered>
+              <Grid.Column width="14">
+                <Content user_list={this.state.user_list} />
+              </Grid.Column>
+            </Grid>
+          </Grid.Column>
+        </Grid.Row>
+
+      </Grid>
+    );
   }
 }
 
