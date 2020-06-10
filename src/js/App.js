@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Dropdown } from 'semantic-ui-react';
+import { Grid, Dropdown, Icon } from 'semantic-ui-react';
 import '../css/App.css';
 
-import Headbar from './layout/heabar';
 import Sidebar from './layout/sidebar';
 import Content from './layout/content';
 
-import { getToken, removeUserSession, setUserSession } from "./utils/API";
+import { getToken, removeUserSession, setUserSession, getUser } from "./utils/API";
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import axios from 'axios';
 
@@ -15,6 +14,7 @@ class Application extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user_login: getUser(),
       user_list: [],
       get_done: false
     };
@@ -49,7 +49,6 @@ class Application extends React.Component {
     if (this.state.get_done === false) {
       this.componentDidMount();
     }
-
     return (
       <Grid className="no-padding">
 
@@ -57,8 +56,9 @@ class Application extends React.Component {
           <Grid.Column width="16" className="app-headbar">
             <div>
               <Grid centered>
-                <Grid.Column width="4" floated="right" className="add-five-margin-top">
+                <Grid.Column width="4" floated="right" className="add-five-margin-top add-two-margin-bottom">
                   <span>
+                    <Icon circular inverted name='users' />
                     <Dropdown text='Hipe Indonesia' className="white-text">
                       <Dropdown.Menu>
                         <Dropdown.Item text=' ' />
@@ -67,7 +67,8 @@ class Application extends React.Component {
                   </span>
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <span>
-                    <Dropdown text='Mr Ahmad' className="white-text">
+                    <Icon circular inverted name='users' />
+                    <Dropdown text={this.state.user_login.FullName} className="white-text">
                       <Dropdown.Menu>
                         <Dropdown.Item text='Logout' onClick={this.handleLogout} />
                       </Dropdown.Menu>

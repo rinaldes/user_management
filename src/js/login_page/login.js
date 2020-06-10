@@ -19,12 +19,11 @@ function LoginForm(props) {
       { username: username.value, password: password.value })
       .then(response => {
         setLoading(false);
-        setUserSession(response.data.token, response.data.user);
+        console.log(response);
+        setUserSession(response.data.Data.Token, response.data.Data.User);
         props.history.push('/');
       }).catch(error => {
         setLoading(false);
-        if (error.response.status === 401) setError(error.response.data.message);
-        else setError("Something went wrong. Please try again later.");
       });
   }
 

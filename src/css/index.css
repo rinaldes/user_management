@@ -61,3 +61,19 @@ body {
 .add-five-margin-top{
   margin-top: 5vh;
 }
+
+.add-ten-margin-bottom{
+  margin-bottom: 10vh;
+}
+
+.add-eight-margin-bottom{
+  margin-bottom: 8vh;
+}
+
+.add-five-margin-bottom{
+  margin-bottom: 5vh;
+}
+
+.add-two-margin-bottom{
+  margin-bottom: 2vh;
+}
