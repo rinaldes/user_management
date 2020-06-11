@@ -31,9 +31,9 @@ class CreateUser extends React.Component {
 
   // Get Contact Data
   GetContact() {
-    fetch('https://api.relier.works/restricted/orgs/breerje6uiensniapev0/contacts?limit=1', {
+    fetch('https://apistaging.linikerja.id/restricted/orgs/brg9fiu6uier3j8h8r60/contacts?limit=1', {
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicmc5Zml1NnVpZXIzajhoOHI2ZyIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTQzNzIzOTAsImlzcyI6IkhpcGVXb3JrIn0.R2jVbvLnvDMEeo_cTnSbNSywabjTIUWd8YnaC1bkOnY`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
@@ -57,10 +57,10 @@ class CreateUser extends React.Component {
 
   // Get User Data
   GetUserData() {
-    fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users/" + this.state.code, {
+    fetch("https://apistaging.linikerja.id/restricted/orgs/brg9fiu6uier3j8h8r60/users/" + this.state.code, {
       "method": "GET",
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicmc5Zml1NnVpZXIzajhoOHI2ZyIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTQzNzIzOTAsImlzcyI6IkhpcGVXb3JrIn0.R2jVbvLnvDMEeo_cTnSbNSywabjTIUWd8YnaC1bkOnY`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
@@ -73,7 +73,7 @@ class CreateUser extends React.Component {
         })
         this.state.email = this.state.dataUser.Email
         this.state.fullname = this.state.dataUser.FullName
-        this.state.corporate = "breerje6uiensniapev0"
+        this.state.corporate = "brg9fiu6uier3j8h8r60"
         this.state.jobrole = this.state.dataUser.IsAdministrator
         this.state.is_active = this.state.dataUser.IsActive
       })
@@ -86,10 +86,10 @@ class CreateUser extends React.Component {
   // Proses Save
   handleSubmit() {
     if (window.location.pathname === "/create") {
-      fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users", {
+      fetch("https://apistaging.linikerja.id/restricted/orgs/brg9fiu6uier3j8h8r60/users", {
         "method": "POST",
         "headers": {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicmc5Zml1NnVpZXIzajhoOHI2ZyIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTQzNzIzOTAsImlzcyI6IkhpcGVXb3JrIn0.R2jVbvLnvDMEeo_cTnSbNSywabjTIUWd8YnaC1bkOnY`,
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
@@ -110,10 +110,10 @@ class CreateUser extends React.Component {
         })
       })
     } else if (window.location.pathname === "/edit") {
-      fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users/" + this.state.code, {
+      fetch("https://apistaging.linikerja.id/restricted/orgs/brg9fiu6uier3j8h8r60/users/" + this.state.code, {
         "method": "PUT",
         "headers": {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicmc5Zml1NnVpZXIzajhoOHI2ZyIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTQzNzIzOTAsImlzcyI6IkhpcGVXb3JrIn0.R2jVbvLnvDMEeo_cTnSbNSywabjTIUWd8YnaC1bkOnY`,
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },

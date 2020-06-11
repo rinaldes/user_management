@@ -5,10 +5,9 @@ import '../css/App.css';
 import Sidebar from './layout/sidebar';
 import Content from './layout/content';
 
-import { getToken, removeUserSession, setUserSession, getUser } from "./utils/API";
+import { getToken, removeUserSession, setUserSession, getUser, getUserList } from "./utils/API";
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import axios from 'axios';
-
 
 class Application extends React.Component {
   constructor(props) {
@@ -25,24 +24,18 @@ class Application extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users?limit=100", {
-      "method": "GET",
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(response => {
+    axios.get(
+      sessionStorage.getItem('urlAPI') + "restricted/orgs/" + sessionStorage.getItem('orgLogin') + "/users",
+      {
+        headers:
+          { Authorization: "Bearer " + sessionStorage.getItem('token-access') }
+      })
+      .then(res => {
         this.setState({
-          user_list: response.Data,
+          user_list: res.data.Data,
           get_done: true
         })
       })
-      .catch(err => {
-        console.log(err);
-      });
   }
 
   render() {

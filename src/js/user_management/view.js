@@ -6,12 +6,12 @@ function Container(props) {
     const requestOptions = {
       method: 'DELETE',
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicjZpNTNlNnVpZWtvZWxlMXFlMCIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTM3NDk3NjEsImlzcyI6IkhpcGVXb3JrIn0.t6ol6UEb3UZ53wkaBSMX36ndiEqy-8P0TrDXw8n2pPM`,
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicmc5Zml1NnVpZXIzajhoOHI2ZyIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTQzNzIzOTAsImlzcyI6IkhpcGVXb3JrIn0.R2jVbvLnvDMEeo_cTnSbNSywabjTIUWd8YnaC1bkOnY`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
     };
-    fetch("https://api.relier.works/restricted/orgs/breerje6uiensniapev0/users/" + userUId, requestOptions).then((response) => {
+    fetch("https://apistaging.linikerja.id/restricted/orgs/brg9fiu6uier3j8h8r60/users/" + userUId, requestOptions).then((response) => {
       return response.json();
     })
     console.log("terhapus");

@@ -11,20 +11,22 @@ function LoginForm(props) {
   const [error, setError] = useState(null);
 
   const handleLogin = () => {
-    props.history.push('/');
-
     setError(null);
     setLoading(true);
-    axios.post('https://api.relier.works/public/auth/login',
+    axios.post('https://apistaging.linikerja.id/public/auth/login',
       { username: username.value, password: password.value })
       .then(response => {
         setLoading(false);
         console.log(response);
-        setUserSession(response.data.Data.Token, response.data.Data.User);
+        setUserSession(response.data.Data.Token, response.data.Data.User, response.data.Data.Organizations[0].UID);
         props.history.push('/');
       }).catch(error => {
         setLoading(false);
       });
+
+    setTimeout(function () { //Start the timer
+      props.history.push('/');
+    }.bind(this), 400)
   }
 
   return (
