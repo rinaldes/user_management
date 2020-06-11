@@ -66,7 +66,7 @@ class Container extends React.Component {
                 <Grid.Column width="7" floated="right">
                   <Grid>
                     <Grid.Column width="10" className="fluid">
-                      <Input icon="search" placeholder="Search user here" id="user_keyword" onChange={this.handlechange} />
+                      <Input icon="search" placeholder="Masukan username" id="user_keyword" onChange={this.handlechange} />
                     </Grid.Column>
                     <Grid.Column width="6">
                       <a href="/create">

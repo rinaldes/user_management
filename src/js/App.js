@@ -5,13 +5,16 @@ import '../css/App.css';
 import Sidebar from './layout/sidebar';
 import Content from './layout/content';
 
-import { removeUserSession, getUser } from "./utils/API";
+import { removeUserSession, getUser, urlAPI } from "./utils/API";
+import axios from 'axios';
 
 class Application extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_login: getUser()
+      user_login: getUser(),
+      user_list: [],
+      get_done: false
     };
   }
 
@@ -20,7 +23,26 @@ class Application extends React.Component {
     this.props.history.push('/login');
   }
 
+  componentDidMount() {
+    let user_keyword = "/users"
+    axios.get(
+      urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + user_keyword,
+      {
+        headers:
+          { Authorization: "Bearer " + localStorage.getItem('token-access') }
+      })
+      .then(res => {
+        this.setState({
+          user_list: res.data.Data
+        })
+      })
+    sessionStorage.setItem("get_done", true)
+  }
+
   render() {
+    if (sessionStorage.getItem("get_done") === false) {
+      this.componentDidMount();
+    }
     return (
       <Grid className="no-padding">
 
