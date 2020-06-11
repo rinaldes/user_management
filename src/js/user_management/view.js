@@ -1,20 +1,16 @@
 import { Table, Button, Grid, Segment, Input, Header } from 'semantic-ui-react';
 import React from 'react';
+import { urlAPI } from "../utils/API";
+import axios from "axios";
 
 function Container(props) {
   const handleClick = userUId => {
-    const requestOptions = {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicmc5Zml1NnVpZXIzajhoOHI2ZyIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTQzNzIzOTAsImlzcyI6IkhpcGVXb3JrIn0.R2jVbvLnvDMEeo_cTnSbNSywabjTIUWd8YnaC1bkOnY`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    };
-    fetch("https://apistaging.linikerja.id/restricted/orgs/brg9fiu6uier3j8h8r60/users/" + userUId, requestOptions).then((response) => {
-      return response.json();
-    })
-    console.log("terhapus");
+    axios.delete(
+      urlAPI + "restricted/orgs/" + sessionStorage.getItem('orgLogin') + "/users/" + userUId,
+      {
+        headers:
+          { Authorization: "Bearer " + sessionStorage.getItem('token-access') }
+      })
     setTimeout(function () { //Start the timer
       window.location.reload()
     }.bind(this), 400)

@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Grid, Dropdown, Icon } from 'semantic-ui-react';
 import '../css/App.css';
 
 import Sidebar from './layout/sidebar';
 import Content from './layout/content';
 
-import { getToken, removeUserSession, setUserSession, getUser, getUserList } from "./utils/API";
-import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
+import { removeUserSession, getUser, urlAPI } from "./utils/API";
 import axios from 'axios';
 
 class Application extends React.Component {
@@ -18,6 +17,7 @@ class Application extends React.Component {
       get_done: false
     };
   }
+
   handleLogout = () => {
     removeUserSession();
     this.props.history.push('/login');
@@ -25,7 +25,7 @@ class Application extends React.Component {
 
   componentDidMount() {
     axios.get(
-      sessionStorage.getItem('urlAPI') + "restricted/orgs/" + sessionStorage.getItem('orgLogin') + "/users",
+      urlAPI + "restricted/orgs/" + sessionStorage.getItem('orgLogin') + "/users",
       {
         headers:
           { Authorization: "Bearer " + sessionStorage.getItem('token-access') }
@@ -52,7 +52,7 @@ class Application extends React.Component {
                 <Grid.Column width="4" floated="right" className="add-five-margin-top add-two-margin-bottom">
                   <span>
                     <Icon circular inverted name='users' />
-                    <Dropdown text='Hipe Indonesia' className="white-text">
+                    <Dropdown text={sessionStorage.getItem('orgName')} className="white-text">
                       <Dropdown.Menu>
                         <Dropdown.Item text=' ' />
                       </Dropdown.Menu>

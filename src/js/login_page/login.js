@@ -1,27 +1,23 @@
 import React, { useState } from 'react';
 import logo from '../../picture/logo.PNG';
 import axios from 'axios';
-import { setUserSession } from '../utils/API';
+import { setUserSession, urlAPI } from '../utils/API';
 import { Button, Form, Grid, Segment, Image } from 'semantic-ui-react'
 
 function LoginForm(props) {
-  const [loading, setLoading] = useState(false);
   const username = useFormInput('');
   const password = useFormInput('');
-  const [error, setError] = useState(null);
 
   const handleLogin = () => {
-    setError(null);
-    setLoading(true);
-    axios.post('https://apistaging.linikerja.id/public/auth/login',
-      { username: username.value, password: password.value })
+    axios.post(
+      urlAPI + "public/auth/login", {
+      username: username.value,
+      password: password.value
+    })
       .then(response => {
-        setLoading(false);
         console.log(response);
-        setUserSession(response.data.Data.Token, response.data.Data.User, response.data.Data.Organizations[0].UID);
+        setUserSession(response.data.Data.Token, response.data.Data.User, response.data.Data.Organizations[0]);
         props.history.push('/');
-      }).catch(error => {
-        setLoading(false);
       });
 
     setTimeout(function () { //Start the timer
@@ -47,13 +43,11 @@ function LoginForm(props) {
             />
             <Button color='teal'
               fluid size='large'
-              value={loading ? 'Loading...' : 'Login'}
+              value='Login'
               onClick={handleLogin}
-              disabled={loading}
             >
               Login
             </Button>
-            {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
           </Segment>
         </Form>
       </Grid.Column>

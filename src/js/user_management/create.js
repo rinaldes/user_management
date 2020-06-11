@@ -1,7 +1,8 @@
 import photos from '../../picture/upload-photo.jpg';
 import { Button, Grid, Segment, Header, Form, Checkbox, Dropdown } from 'semantic-ui-react';
 import React from 'react';
-
+import axios from 'axios';
+import { urlAPI } from '../utils/API';
 
 class CreateUser extends React.Component {
   constructor(props) {
@@ -31,16 +32,14 @@ class CreateUser extends React.Component {
 
   // Get Contact Data
   GetContact() {
-    fetch('https://apistaging.linikerja.id/restricted/orgs/brg9fiu6uier3j8h8r60/contacts?limit=1', {
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicmc5Zml1NnVpZXIzajhoOHI2ZyIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTQzNzIzOTAsImlzcyI6IkhpcGVXb3JrIn0.R2jVbvLnvDMEeo_cTnSbNSywabjTIUWd8YnaC1bkOnY`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-      .then(res => res.json())
+    axios.get(
+      urlAPI + "restricted/orgs/" + sessionStorage.getItem('orgLogin') + "/contacts",
+      {
+        headers:
+          { Authorization: "Bearer " + sessionStorage.getItem('token-access') }
+      })
       .then(json => {
-        this.state.contactListAPI = [json.Data]
+        this.state.contactListAPI = [json.data.Data]
         this.state.contactListAPI.map(contact => {
           if (this.state.previous_uid !== contact.UID) {
             this.state.contactList.push({
@@ -57,84 +56,61 @@ class CreateUser extends React.Component {
 
   // Get User Data
   GetUserData() {
-    fetch("https://apistaging.linikerja.id/restricted/orgs/brg9fiu6uier3j8h8r60/users/" + this.state.code, {
-      "method": "GET",
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicmc5Zml1NnVpZXIzajhoOHI2ZyIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTQzNzIzOTAsImlzcyI6IkhpcGVXb3JrIn0.R2jVbvLnvDMEeo_cTnSbNSywabjTIUWd8YnaC1bkOnY`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-      .then(response => response.json())
+    axios.get(
+      urlAPI + "restricted/orgs/" + sessionStorage.getItem('orgLogin') + "/users/" + this.state.code,
+      {
+        headers:
+          { Authorization: "Bearer " + sessionStorage.getItem('token-access') }
+      })
       .then(response => {
         this.setState({
-          dataUser: response.Data,
+          dataUser: response.data.Data,
           get_done_user: true
         })
         this.state.email = this.state.dataUser.Email
         this.state.fullname = this.state.dataUser.FullName
-        this.state.corporate = "brg9fiu6uier3j8h8r60"
+        this.state.corporate = sessionStorage.getItem("orgLogin")
         this.state.jobrole = this.state.dataUser.IsAdministrator
         this.state.is_active = this.state.dataUser.IsActive
       })
-      .catch(err => {
-        console.log(err);
-      });
-
   }
 
   // Proses Save
   handleSubmit() {
-    if (window.location.pathname === "/create") {
-      fetch("https://apistaging.linikerja.id/restricted/orgs/brg9fiu6uier3j8h8r60/users", {
-        "method": "POST",
-        "headers": {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicmc5Zml1NnVpZXIzajhoOHI2ZyIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTQzNzIzOTAsImlzcyI6IkhpcGVXb3JrIn0.R2jVbvLnvDMEeo_cTnSbNSywabjTIUWd8YnaC1bkOnY`,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          FullName: this.state.fullname,
-          Email: this.state.email,
-          IsAdministrator: this.state.jobrole,
-          IsActive: this.state.is_active,
-          OrganizationUID: this.state.corporate,
-          Username: this.state.email,
-          NickName: this.state.fullname.substring(0, 4),
-          Picture: "foto.png",
-          Status: "",
-          IsOnline: false,
-          IsIdle: false,
-          IsOnCall: false,
-          LastOnlineAt: "0001-01-01T00:00:00Z"
-        })
-      })
-    } else if (window.location.pathname === "/edit") {
-      fetch("https://apistaging.linikerja.id/restricted/orgs/brg9fiu6uier3j8h8r60/users/" + this.state.code, {
-        "method": "PUT",
-        "headers": {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRCI6MTAwMDAwLCJVSUQiOiJicmc5Zml1NnVpZXIzajhoOHI2ZyIsIlVzZXJuYW1lIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJleHAiOjE1OTQzNzIzOTAsImlzcyI6IkhpcGVXb3JrIn0.R2jVbvLnvDMEeo_cTnSbNSywabjTIUWd8YnaC1bkOnY`,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          FullName: this.state.fullname,
-          Email: this.state.email,
-          IsAdministrator: this.state.jobrole,
-          IsActive: this.state.is_active,
-          OrganizationUID: this.state.corporate,
-          Username: this.state.email,
-          NickName: this.state.fullname.substring(0, 4),
-          Picture: "foto.png",
-          Status: "",
-          IsOnline: false,
-          IsIdle: false,
-          IsOnCall: false,
-          LastOnlineAt: "0001-01-01T00:00:00Z"
-        })
-      })
+    const inputDataUser = {
+      FullName: this.state.fullname,
+      Email: this.state.email,
+      IsAdministrator: this.state.jobrole,
+      IsActive: this.state.is_active,
+      OrganizationUID: this.state.corporate,
+      Username: this.state.email,
+      NickName: this.state.fullname.substring(0, 4),
+      Picture: "foto.png",
+      Status: "",
+      IsOnline: false,
+      IsIdle: false,
+      IsOnCall: false,
+      LastOnlineAt: "0001-01-01T00:00:00Z"
     }
-    window.location.replace("/");
+
+    if (window.location.pathname === "/create") {
+      axios.post(
+        urlAPI + "restricted/orgs/" + sessionStorage.getItem('orgLogin') + "/users", inputDataUser,
+        {
+          headers:
+            { Authorization: "Bearer " + sessionStorage.getItem('token-access') }
+        })
+    } else if (window.location.pathname === "/edit") {
+      axios.put(
+        urlAPI + "restricted/orgs/" + sessionStorage.getItem('orgLogin') + "/users/" + this.state.code, inputDataUser,
+        {
+          headers:
+            { Authorization: "Bearer " + sessionStorage.getItem('token-access') }
+        })
+    }
+    setTimeout(function () {
+      window.location.replace("/");
+    }.bind(this), 400)
   }
 
   handleChange(event) {
