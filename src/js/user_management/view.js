@@ -1,4 +1,5 @@
 import { Table, Button, Grid, Segment, Input, Header } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import React from 'react';
 import { urlAPI } from "../utils/API";
 import axios from "axios";
@@ -69,9 +70,9 @@ class Container extends React.Component {
                       <Input icon="search" placeholder="Masukan username" id="user_keyword" onChange={this.handlechange} />
                     </Grid.Column>
                     <Grid.Column width="6">
-                      <a href="/create">
+                      <Link to="/create">
                         <Button content="Add User" className="fluid green-button" />
-                      </a>
+                      </Link>
                     </Grid.Column>
                   </Grid>
                 </Grid.Column>
@@ -108,9 +109,9 @@ class Container extends React.Component {
                                   : <Table.Cell><font color="red">Tidak</font></Table.Cell>
                               }
                               <Table.Cell>
-                                <a href={"/edit?code=" + user.UID}>
+                                <Link to={"/edit?code=" + user.UID}>
                                   <Button className="fluid green-button">Edit</Button>
-                                </a>
+                                </Link>
                                 <br />
                                 <Button className="fluid" color="red" onClick={() => { this.handleClick(user.UID) }} >Hapus</Button>
                               </Table.Cell>

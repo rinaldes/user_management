@@ -7,8 +7,11 @@ import { urlAPI } from '../utils/API';
 class CreateUser extends React.Component {
   constructor(props) {
     super(props);
+    const urlparameter = window.location.search;
+    const params = new URLSearchParams(urlparameter);
+    console.log(params.get("code"))
     this.state = {
-      code: props.user_list,
+      code: params.get('code'),
       contactListAPI: [],
       contactList: [],
       get_done: false,
@@ -56,23 +59,25 @@ class CreateUser extends React.Component {
 
   // Get User Data
   GetUserData() {
-    axios.get(
-      urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + "/users/" + this.state.code,
-      {
-        headers:
-          { Authorization: "Bearer " + localStorage.getItem('token-access') }
-      })
-      .then(response => {
-        this.setState({
-          dataUser: response.data.Data,
-          get_done_user: true
+    setTimeout(function () { //Start the timer
+      axios.get(
+        urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + "/users/" + this.state.code,
+        {
+          headers:
+            { Authorization: "Bearer " + localStorage.getItem('token-access') }
         })
-        this.state.email = this.state.dataUser.Email
-        this.state.fullname = this.state.dataUser.FullName
-        this.state.corporate = localStorage.getItem("orgLogin")
-        this.state.jobrole = this.state.dataUser.IsAdministrator
-        this.state.is_active = this.state.dataUser.IsActive
-      })
+        .then(response => {
+          this.setState({
+            dataUser: response.data.Data,
+            get_done_user: true,
+            email: response.data.Data.Email,
+            fullname: response.data.Data.FullName,
+            jobrole: response.data.Data.IsAdministrator,
+            corporate: localStorage.getItem("orgLogin"),
+            is_active: response.data.Data.IsActive
+          })
+        })
+    }.bind(this), 300)
   }
 
   // Proses Save

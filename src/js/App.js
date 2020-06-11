@@ -13,8 +13,6 @@ class Application extends React.Component {
     super(props);
     this.state = {
       user_login: getUser(),
-      user_list: [],
-      get_done: false
     };
   }
 
@@ -23,26 +21,7 @@ class Application extends React.Component {
     this.props.history.push('/login');
   }
 
-  componentDidMount() {
-    let user_keyword = "/users"
-    axios.get(
-      urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + user_keyword,
-      {
-        headers:
-          { Authorization: "Bearer " + localStorage.getItem('token-access') }
-      })
-      .then(res => {
-        this.setState({
-          user_list: res.data.Data
-        })
-      })
-    sessionStorage.setItem("get_done", true)
-  }
-
   render() {
-    if (sessionStorage.getItem("get_done") === false) {
-      this.componentDidMount();
-    }
     return (
       <Grid className="no-padding">
 
@@ -81,7 +60,7 @@ class Application extends React.Component {
           <Grid.Column className="add-ten-padding-top app-content">
             <Grid centered>
               <Grid.Column width="14">
-                <Content user_list={this.state.user_list} />
+                <Content />
               </Grid.Column>
             </Grid>
           </Grid.Column>
