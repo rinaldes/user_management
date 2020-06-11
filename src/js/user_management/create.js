@@ -33,10 +33,10 @@ class CreateUser extends React.Component {
   // Get Contact Data
   GetContact() {
     axios.get(
-      urlAPI + "restricted/orgs/" + sessionStorage.getItem('orgLogin') + "/contacts",
+      urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + "/contacts",
       {
         headers:
-          { Authorization: "Bearer " + sessionStorage.getItem('token-access') }
+          { Authorization: "Bearer " + localStorage.getItem('token-access') }
       })
       .then(json => {
         this.state.contactListAPI = [json.data.Data]
@@ -57,10 +57,10 @@ class CreateUser extends React.Component {
   // Get User Data
   GetUserData() {
     axios.get(
-      urlAPI + "restricted/orgs/" + sessionStorage.getItem('orgLogin') + "/users/" + this.state.code,
+      urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + "/users/" + this.state.code,
       {
         headers:
-          { Authorization: "Bearer " + sessionStorage.getItem('token-access') }
+          { Authorization: "Bearer " + localStorage.getItem('token-access') }
       })
       .then(response => {
         this.setState({
@@ -69,7 +69,7 @@ class CreateUser extends React.Component {
         })
         this.state.email = this.state.dataUser.Email
         this.state.fullname = this.state.dataUser.FullName
-        this.state.corporate = sessionStorage.getItem("orgLogin")
+        this.state.corporate = localStorage.getItem("orgLogin")
         this.state.jobrole = this.state.dataUser.IsAdministrator
         this.state.is_active = this.state.dataUser.IsActive
       })
@@ -95,17 +95,17 @@ class CreateUser extends React.Component {
 
     if (window.location.pathname === "/create") {
       axios.post(
-        urlAPI + "restricted/orgs/" + sessionStorage.getItem('orgLogin') + "/users", inputDataUser,
+        urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + "/users", inputDataUser,
         {
           headers:
-            { Authorization: "Bearer " + sessionStorage.getItem('token-access') }
+            { Authorization: "Bearer " + localStorage.getItem('token-access') }
         })
     } else if (window.location.pathname === "/edit") {
       axios.put(
-        urlAPI + "restricted/orgs/" + sessionStorage.getItem('orgLogin') + "/users/" + this.state.code, inputDataUser,
+        urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + "/users/" + this.state.code, inputDataUser,
         {
           headers:
-            { Authorization: "Bearer " + sessionStorage.getItem('token-access') }
+            { Authorization: "Bearer " + localStorage.getItem('token-access') }
         })
     }
     setTimeout(function () {

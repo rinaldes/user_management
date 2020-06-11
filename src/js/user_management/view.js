@@ -6,10 +6,10 @@ import axios from "axios";
 function Container(props) {
   const handleClick = userUId => {
     axios.delete(
-      urlAPI + "restricted/orgs/" + sessionStorage.getItem('orgLogin') + "/users/" + userUId,
+      urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + "/users/" + userUId,
       {
         headers:
-          { Authorization: "Bearer " + sessionStorage.getItem('token-access') }
+          { Authorization: "Bearer " + localStorage.getItem('token-access') }
       })
     setTimeout(function () { //Start the timer
       window.location.reload()

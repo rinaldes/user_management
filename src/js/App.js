@@ -25,10 +25,10 @@ class Application extends React.Component {
 
   componentDidMount() {
     axios.get(
-      urlAPI + "restricted/orgs/" + sessionStorage.getItem('orgLogin') + "/users",
+      urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + "/users",
       {
         headers:
-          { Authorization: "Bearer " + sessionStorage.getItem('token-access') }
+          { Authorization: "Bearer " + localStorage.getItem('token-access') }
       })
       .then(res => {
         this.setState({
@@ -52,7 +52,7 @@ class Application extends React.Component {
                 <Grid.Column width="4" floated="right" className="add-five-margin-top add-two-margin-bottom">
                   <span>
                     <Icon circular inverted name='users' />
-                    <Dropdown text={sessionStorage.getItem('orgName')} className="white-text">
+                    <Dropdown text={localStorage.getItem('orgName')} className="white-text">
                       <Dropdown.Menu>
                         <Dropdown.Item text=' ' />
                       </Dropdown.Menu>
