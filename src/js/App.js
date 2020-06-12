@@ -5,8 +5,7 @@ import '../css/App.css';
 import Sidebar from './layout/sidebar';
 import Content from './layout/content';
 
-import { removeUserSession, getUser, urlAPI } from "./utils/API";
-import axios from 'axios';
+import { removeUserSession, getUser } from "./utils/API";
 
 class Application extends React.Component {
   constructor(props) {

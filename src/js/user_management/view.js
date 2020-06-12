@@ -10,8 +10,11 @@ class Container extends React.Component {
     this.state = {
       user_list: [],
       get_done: false,
-      search_item: ""
+      search_item: "",
+      arah_sort: null,
+      column_sort: null
     };
+    this.handleSort = this.handleSort.bind(this)
   }
 
   componentDidMount() {
@@ -32,6 +35,23 @@ class Container extends React.Component {
         })
       })
     this.state.get_done = true
+  }
+
+  handleSort(event, sortKey) {
+    let { user_list, column_sort, arah_sort } = this.state;
+    if (this.state.column_sort === null || this.state.column_sort !== sortKey) {
+      user_list.sort((a, b) => a[sortKey].localeCompare(b[sortKey]))
+      column_sort = sortKey
+      arah_sort = "up"
+    } else {
+      user_list.reverse();
+      arah_sort = ((this.state.arah_sort === "up") ? "down" : "up");
+    }
+    this.setState({
+      user_list: user_list,
+      column_sort: column_sort,
+      arah_sort: arah_sort
+    })
   }
 
   handleClick = userUId => {
@@ -82,9 +102,9 @@ class Container extends React.Component {
                   <Table>
                     <Table.Header className="add-five-padding-top">
                       <Table.Row>
-                        <Table.HeaderCell>Nama</Table.HeaderCell>
-                        <Table.HeaderCell>Username</Table.HeaderCell>
-                        <Table.HeaderCell>Email</Table.HeaderCell>
+                        <Table.HeaderCell onClick={e => this.handleSort(e, 'FullName')}>Nama</Table.HeaderCell>
+                        <Table.HeaderCell onClick={e => this.handleSort(e, 'Username')}>Username</Table.HeaderCell>
+                        <Table.HeaderCell onClick={e => this.handleSort(e, 'Email')}>Email</Table.HeaderCell>
                         <Table.HeaderCell>Admin</Table.HeaderCell>
                         <Table.HeaderCell>Status</Table.HeaderCell>
                         <Table.HeaderCell></Table.HeaderCell>
