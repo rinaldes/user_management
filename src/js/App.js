@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid, Dropdown, Icon } from 'semantic-ui-react';
-import '../css/App.css';
 
 import Sidebar from './layout/sidebar';
 import Content from './layout/content';

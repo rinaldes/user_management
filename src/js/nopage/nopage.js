@@ -8,7 +8,7 @@ function NoPage() {
       <Grid.Column style={{ maxWidth: 450 }}>
         <Image src={logo} textAlign='center' style={{ marginRight: "auto", marginLeft: "auto" }} />
         <br />
-        <h2>404 Not Found</h2>
+        <h2 className="white">404 Not Found</h2>
       </Grid.Column>
     </Grid>
   )

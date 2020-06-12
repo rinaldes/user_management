@@ -1,31 +1,42 @@
+$font: 'Heebo', 'lato', 'Helvetica Neue', sans-serif;
+$relier-green: #248e7b;
+$relier-white: #ffff;
+$relier-dark-gray: #A3A5A7;
+$relier-light-gray: #FCFCFC;
+
 body {
   margin: 0;
-  font-family: 'Heebo', 'lato', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: $font;
+  
+  .app-headbar {
+      background-color: $relier-green;
+    min-height: 10vh;
+  }
+
+  .app-sidebar{
+    background-color: $relier-white;
+    min-height: 100vh;
+    font-size: 14px;
+    color: $relier-dark-gray;
+  }
+
+  .app-content{
+    background-color: $relier-light-gray;
+    min-height: 100vh;
+  }
+
 }
 
 /* Component */
-.app-headbar {
-  background-color: #248e7b;
-  min-height: 10vh;
-}
-
-.app-sidebar{
-  background-color: white;
-  min-height: 100vh;
-  font-size: 14px;
-  color: #A3A5A7;
-}
-
-.app-content{
-  background-color: #FCFCFC;
-  min-height: 100vh;
+/* button */
+.ui.button.green-button{
+  background-color: $relier-green;
+  color: $relier-white;
 }
 
 /* Text */
 .white-text{
-  color: white;
+  color: $relier-white;
   font-weight: bold;
 }
 

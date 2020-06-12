@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.min.css'
-import './css/index.css';
+import './css/index.scss';
 import Application from './js/App.js';
 import LoginForm from './js/login_page/login';
 import NoPage from './js/nopage/nopage';
