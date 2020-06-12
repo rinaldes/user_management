@@ -1,4 +1,4 @@
-import { Table, Button, Grid, Segment, Input, Header } from 'semantic-ui-react';
+import { Table, Button, Grid, Segment, Input, Header, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { urlAPI } from "../utils/API";
@@ -102,9 +102,36 @@ class Container extends React.Component {
                   <Table>
                     <Table.Header className="add-five-padding-top">
                       <Table.Row>
-                        <Table.HeaderCell onClick={e => this.handleSort(e, 'FullName')}>Nama</Table.HeaderCell>
-                        <Table.HeaderCell onClick={e => this.handleSort(e, 'Username')}>Username</Table.HeaderCell>
-                        <Table.HeaderCell onClick={e => this.handleSort(e, 'Email')}>Email</Table.HeaderCell>
+                        <Table.HeaderCell onClick={e => this.handleSort(e, 'FullName')}>
+                          <Grid columns='equal'>
+                            <Grid.Column>
+                              Nama
+                            </Grid.Column>
+                            <Grid.Column width={2}>
+                              <Icon name={(this.state.column_sort !== "FullName") ? "sort" : ((this.state.arah_sort === "up") ? "sort ascending" : "sort descending")} />
+                            </Grid.Column>
+                          </Grid>
+                        </Table.HeaderCell>
+                        <Table.HeaderCell onClick={e => this.handleSort(e, 'Username')}>
+                          <Grid columns='equal'>
+                            <Grid.Column>
+                              Username
+                            </Grid.Column>
+                            <Grid.Column width={2}>
+                              <Icon name={(this.state.column_sort !== "Username") ? "sort" : ((this.state.arah_sort === "up") ? "sort ascending" : "sort descending")} />
+                            </Grid.Column>
+                          </Grid>
+                        </Table.HeaderCell>
+                        <Table.HeaderCell onClick={e => this.handleSort(e, 'Email')}>
+                          <Grid columns='equal'>
+                            <Grid.Column>
+                              Email
+                            </Grid.Column>
+                            <Grid.Column width={2}>
+                              <Icon name={(this.state.column_sort !== "Email") ? "sort" : ((this.state.arah_sort === "up") ? "sort ascending" : "sort descending")} />
+                            </Grid.Column>
+                          </Grid>
+                        </Table.HeaderCell>
                         <Table.HeaderCell>Admin</Table.HeaderCell>
                         <Table.HeaderCell>Status</Table.HeaderCell>
                         <Table.HeaderCell></Table.HeaderCell>
