@@ -1,5 +1,5 @@
-import { Grid, Segment, Header, Icon } from 'semantic-ui-react';
-import { Button, Input, Table, Space } from 'antd';
+import { Segment } from 'semantic-ui-react';
+import { Button, Input, Table, Space, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { urlAPI } from "../utils/API";
@@ -21,7 +21,6 @@ class Container extends React.Component {
     if (this.state.search_item != "" && this.state.search_item != null && this.state.search_item != 0) {
       user_keyword += "?keyword=" + this.state.search_item
     }
-    console.log(urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + user_keyword)
     axios.get(
       urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + user_keyword,
       {
@@ -123,39 +122,37 @@ class Container extends React.Component {
         Status: (user.IsActive) ? "Ya" : "Tidak",
       })
     })
-    console.log(data)
     return (
       <Segment>
-        <Grid centered>
-          <Grid.Column width="14">
-            <Grid>
-              <Grid.Row className="add-five-margin-top">
-                <Grid.Column width="9" floated="left">
-                  <Header as="h1">User List</Header>
-                </Grid.Column>
-                <Grid.Column width="7" floated="right">
-                  <Grid>
-                    <Grid.Column width="10" className="fluid">
-                      <Search icon="search" placeholder="Masukan username" id="user_keyword" onChange={this.handlechange} />
-                    </Grid.Column>
-                    <Grid.Column width="6">
-                      <Link to="/create">
-                        <Button type="primary" className="green-button">
-                          Add User
+        <Row className="add-five-margin-top">
+          <Col span={1}></Col>
+          <Col span={22}>
+            <Row>
+              <Col span={14}><h1>User List</h1></Col>
+              <Col span={10}>
+                <Row>
+                  <Col span={14}>
+                    <Search icon="search" placeholder="Masukan username" id="user_keyword" onChange={this.handlechange} />
+                  </Col>
+                  <Col span={2}></Col>
+                  <Col span={8}>
+                    <Link to="/create">
+                      <Button type="primary" className="green-button">
+                        Add User
                         </Button>
-                      </Link>
-                    </Grid.Column>
-                  </Grid>
-                </Grid.Column>
-              </Grid.Row>
-              <Grid.Row className="add-eight-padding-top">
-                <Grid.Column>
-                  <Table columns={columns} dataSource={data} onChange={this.handleChange} />
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </Grid.Column>
-        </Grid>
+                    </Link>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <Row className="add-five-padding-top">
+              <Col span="24">
+                <Table columns={columns} dataSource={data} onChange={this.handleChange} />
+              </Col>
+            </Row>
+          </Col>
+          <Col span={1}></Col>
+        </Row>
         <br />
       </Segment >
     );
