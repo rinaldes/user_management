@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import logo from '../../picture/logo.PNG';
 import axios from 'axios';
 import { setUserSession, urlAPI } from '../utils/API';
-import { Button, Form, Grid, Segment, Image } from 'semantic-ui-react'
+import { Grid, Segment, Image } from 'semantic-ui-react'
+import { Form, Input, Button, Checkbox } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 function LoginForm(props) {
   const username = useFormInput('');
@@ -30,24 +32,44 @@ function LoginForm(props) {
       <Grid.Column style={{ maxWidth: 450 }}>
         <Image src={logo} textAlign='center' style={{ marginRight: "auto", marginLeft: "auto" }} />
         <br />
-        <Form size='large'>
-          <Segment stacked>
-            <Form.Input fluid icon='user' {...username} iconPosition='left' placeholder='E-mail address' />
-            <Form.Input
-              fluid
-              icon='lock'
-              iconPosition='left'
-              placeholder='Password'
-              type='password'
-              {...password}
-            />
-            <Button color='teal'
-              fluid size='large'
-              value='Login'
-              onClick={handleLogin}
+        <Form name="normal_login" className="login-form" onFinish={handleLogin} >
+          <Segment textAlign='right' >
+            <Form.Item
+              name="username"
+              {...username}
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your E-mail address!',
+                },
+              ]}
             >
-              Login
-            </Button>
+              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              {...password}
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your Password!',
+                },
+              ]}
+            >
+              <Input
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="Password"
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit" className="login-form-button">
+                Log in
+              </Button>
+            </Form.Item>
+            <Form.Item name="remember" valuePropName="checked" noStyle>
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
           </Segment>
         </Form>
       </Grid.Column>
