@@ -1,5 +1,5 @@
-import { Table, Grid, Segment, Header, Icon } from 'semantic-ui-react';
-import { Button, Input } from 'antd';
+import { Grid, Segment, Header, Icon } from 'semantic-ui-react';
+import { Button, Input, Table, Space } from 'antd';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { urlAPI } from "../utils/API";
@@ -13,10 +13,7 @@ class Container extends React.Component {
       user_list: [],
       get_done: false,
       search_item: "",
-      arah_sort: null,
-      column_sort: null
     };
-    this.handleSort = this.handleSort.bind(this)
   }
 
   componentDidMount() {
@@ -37,23 +34,6 @@ class Container extends React.Component {
         })
       })
     this.state.get_done = true
-  }
-
-  handleSort(event, sortKey) {
-    let { user_list, column_sort, arah_sort } = this.state;
-    if (this.state.column_sort === null || this.state.column_sort !== sortKey) {
-      user_list.sort((a, b) => a[sortKey].localeCompare(b[sortKey]))
-      column_sort = sortKey
-      arah_sort = "up"
-    } else {
-      user_list.reverse();
-      arah_sort = ((this.state.arah_sort === "up") ? "down" : "up");
-    }
-    this.setState({
-      user_list: user_list,
-      column_sort: column_sort,
-      arah_sort: arah_sort
-    })
   }
 
   handleClick = userUId => {
@@ -77,6 +57,73 @@ class Container extends React.Component {
     if (this.state.get_done === false) {
       this.componentDidMount();
     }
+    const columns = [
+      {
+        title: 'Nama',
+        dataIndex: 'FullName',
+        key: 'FullName',
+        sorter: (a, b) => a.FullName.localeCompare(b.FullName),
+        sortDirections: ['descend', 'ascend'],
+      },
+      {
+        title: 'Username',
+        dataIndex: 'Username',
+        key: 'Username',
+        sorter: (a, b) => a.Username.localeCompare(b.Username),
+        sortDirections: ['descend', 'ascend'],
+      },
+      {
+        title: 'Email',
+        dataIndex: 'Email',
+        key: 'Email',
+        sorter: (a, b) => a.Email.localeCompare(b.Email),
+        sortDirections: ['descend', 'ascend'],
+      },
+      {
+        title: 'Admin',
+        dataIndex: 'Admin',
+        key: 'Admin',
+        sorter: (a, b) => a.Admin.localeCompare(b.Admin),
+        sortDirections: ['descend', 'ascend'],
+      },
+      {
+        title: 'Status',
+        dataIndex: 'Status',
+        key: 'Status',
+        sorter: (a, b) => a.Status.localeCompare(b.Status),
+        sortDirections: ['descend', 'ascend'],
+      },
+      {
+        title: ' ',
+        key: 'action',
+        render: (text, record) => (
+          <Space size="middle">
+            <Link to={"/edit?code=" + record.key}>
+              <Button type="primary" className="green-button">
+                Edit
+              </Button>
+            </Link>
+            <Button type="danger" onClick={() => { this.handleClick(record.key) }} >
+              Hapus
+            </Button>
+          </Space>
+        ),
+      },
+    ];
+
+    const data = [];
+
+    this.state.user_list.map(user => {
+      data.push({
+        key: user.UID,
+        FullName: user.FullName,
+        Username: user.Username,
+        Email: user.Email,
+        Admin: (user.IsAdministrator) ? "Ya" : "Bukan",
+        Status: (user.IsActive) ? "Ya" : "Tidak",
+      })
+    })
+    console.log(data)
     return (
       <Segment>
         <Grid centered>
@@ -103,81 +150,7 @@ class Container extends React.Component {
               </Grid.Row>
               <Grid.Row className="add-eight-padding-top">
                 <Grid.Column>
-                  <Table>
-                    <Table.Header className="add-five-padding-top">
-                      <Table.Row>
-                        <Table.HeaderCell onClick={e => this.handleSort(e, 'FullName')}>
-                          <Grid columns='equal'>
-                            <Grid.Column>
-                              Nama
-                            </Grid.Column>
-                            <Grid.Column width={2}>
-                              <Icon name={(this.state.column_sort !== "FullName") ? "sort" : ((this.state.arah_sort === "up") ? "sort ascending" : "sort descending")} />
-                            </Grid.Column>
-                          </Grid>
-                        </Table.HeaderCell>
-                        <Table.HeaderCell onClick={e => this.handleSort(e, 'Username')}>
-                          <Grid columns='equal'>
-                            <Grid.Column>
-                              Username
-                            </Grid.Column>
-                            <Grid.Column width={2}>
-                              <Icon name={(this.state.column_sort !== "Username") ? "sort" : ((this.state.arah_sort === "up") ? "sort ascending" : "sort descending")} />
-                            </Grid.Column>
-                          </Grid>
-                        </Table.HeaderCell>
-                        <Table.HeaderCell onClick={e => this.handleSort(e, 'Email')}>
-                          <Grid columns='equal'>
-                            <Grid.Column>
-                              Email
-                            </Grid.Column>
-                            <Grid.Column width={2}>
-                              <Icon name={(this.state.column_sort !== "Email") ? "sort" : ((this.state.arah_sort === "up") ? "sort ascending" : "sort descending")} />
-                            </Grid.Column>
-                          </Grid>
-                        </Table.HeaderCell>
-                        <Table.HeaderCell>Admin</Table.HeaderCell>
-                        <Table.HeaderCell>Status</Table.HeaderCell>
-                        <Table.HeaderCell></Table.HeaderCell>
-                      </Table.Row>
-                    </Table.Header>
-                    <Table.Body>
-                      {
-                        this.state.user_list.map(user => {
-                          return (
-                            < Table.Row >
-                              <Table.Cell>{user.FullName}</Table.Cell>
-                              <Table.Cell>{user.Username}</Table.Cell>
-                              <Table.Cell>{user.Email}</Table.Cell>
-                              {
-                                (user.IsAdministrator)
-                                  ? <Table.Cell><font color="green">Ya</font></Table.Cell>
-                                  : <Table.Cell><font color="red">Bukan</font></Table.Cell>
-                              }
-                              {
-                                (user.IsActive)
-                                  ? <Table.Cell><font color="green">Ya</font></Table.Cell>
-                                  : <Table.Cell><font color="red">Tidak</font></Table.Cell>
-                              }
-                              <Table.Cell>
-                                <Link to={"/edit?code=" + user.UID}>
-                                  <Button type="primary" className="green-button">
-                                    Edit
-                                  </Button>
-                                </Link>
-                                <br />
-                                <br />
-                                <Button type="danger" onClick={() => { this.handleClick(user.UID) }} >
-                                  Hapus
-                                </Button>
-
-                              </Table.Cell>
-                            </Table.Row>
-                          )
-                        })
-                      }
-                    </Table.Body>
-                  </Table>
+                  <Table columns={columns} dataSource={data} onChange={this.handleChange} />
                 </Grid.Column>
               </Grid.Row>
             </Grid>

@@ -1,5 +1,5 @@
 import photos from '../../picture/upload-photo.jpg';
-import { Button, Input } from 'antd';
+import { Button, Input, Radio, Select, Cascader, InputNumber, TreeSelect, Switch } from 'antd';
 import { Grid, Segment, Header, Form, Checkbox, Dropdown } from 'semantic-ui-react';
 import React from 'react';
 import axios from 'axios';
@@ -255,6 +255,7 @@ class CreateUser extends React.Component {
             </Grid>
           </Grid.Column>
         </Grid>
+        <br />
       </Segment >
     );
   };
