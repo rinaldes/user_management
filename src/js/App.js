@@ -1,6 +1,7 @@
 import React from 'react';
-import { Grid, Dropdown, Icon } from 'semantic-ui-react';
-import { Layout } from 'antd';
+import { Icon } from 'semantic-ui-react';
+import { Layout, Row, Col, Menu, Dropdown } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 
 // Page
 import Sidebar from './layout/sidebar';
@@ -24,31 +25,37 @@ class Application extends React.Component {
   }
 
   render() {
+
+    const menu = (
+      <Menu onClick={this.handleLogout}>
+        <Menu.Item>
+          Logout
+        </Menu.Item>
+      </Menu >
+    );
+
     return (
       <Layout>
         <Header className="app-headbar">
           <div>
-            <Grid centered>
-              <Grid.Column width="4" floated="right">
-                <span>
+            <Row align="right">
+              <Col span={18}></Col>
+              <Col span={6}>
+                <span className="white-text">
                   <Icon circular inverted name='users' />
-                  <Dropdown text={localStorage.getItem('orgName')} className="white-text">
-                    <Dropdown.Menu>
-                      <Dropdown.Item text=' ' />
-                    </Dropdown.Menu>
-                  </Dropdown>
+                  {localStorage.getItem('orgName')} <DownOutlined />
                 </span>
                   &nbsp;&nbsp;&nbsp;&nbsp;
-                  <span>
+                <span>
                   <Icon circular inverted name='users' />
-                  <Dropdown text={this.state.user_login.FullName} className="white-text">
-                    <Dropdown.Menu>
-                      <Dropdown.Item text='Logout' onClick={this.handleLogout} />
-                    </Dropdown.Menu>
+                  <Dropdown overlay={menu} className="white-text">
+                    <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                      {this.state.user_login.FullName} <DownOutlined />
+                    </a>
                   </Dropdown>
                 </span>
-              </Grid.Column>
-            </Grid>
+              </Col>
+            </Row>
           </div>
         </Header>
         <Layout>
