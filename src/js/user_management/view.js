@@ -1,8 +1,10 @@
-import { Table, Button, Grid, Segment, Input, Header, Icon } from 'semantic-ui-react';
+import { Table, Grid, Segment, Header, Icon } from 'semantic-ui-react';
+import { Button, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { urlAPI } from "../utils/API";
 import axios from "axios";
+const { Search } = Input;
 
 class Container extends React.Component {
   constructor(props) {
@@ -87,11 +89,13 @@ class Container extends React.Component {
                 <Grid.Column width="7" floated="right">
                   <Grid>
                     <Grid.Column width="10" className="fluid">
-                      <Input icon="search" placeholder="Masukan username" id="user_keyword" onChange={this.handlechange} />
+                      <Search icon="search" placeholder="Masukan username" id="user_keyword" onChange={this.handlechange} />
                     </Grid.Column>
                     <Grid.Column width="6">
                       <Link to="/create">
-                        <Button content="Add User" className="fluid green-button" />
+                        <Button type="primary" className="green-button">
+                          Add User
+                        </Button>
                       </Link>
                     </Grid.Column>
                   </Grid>
@@ -157,10 +161,16 @@ class Container extends React.Component {
                               }
                               <Table.Cell>
                                 <Link to={"/edit?code=" + user.UID}>
-                                  <Button className="fluid green-button">Edit</Button>
+                                  <Button type="primary" className="green-button">
+                                    Edit
+                                  </Button>
                                 </Link>
                                 <br />
-                                <Button className="fluid" color="red" onClick={() => { this.handleClick(user.UID) }} >Hapus</Button>
+                                <br />
+                                <Button type="danger" onClick={() => { this.handleClick(user.UID) }} >
+                                  Hapus
+                                </Button>
+
                               </Table.Cell>
                             </Table.Row>
                           )
@@ -173,6 +183,7 @@ class Container extends React.Component {
             </Grid>
           </Grid.Column>
         </Grid>
+        <br />
       </Segment >
     );
   }

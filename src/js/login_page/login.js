@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import logo from '../../picture/logo.PNG';
 import axios from 'axios';
+import '../../css/index.scss';
 import { setUserSession, urlAPI } from '../utils/API';
-import { Grid, Segment, Image } from 'semantic-ui-react'
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Segment } from 'semantic-ui-react'
+import { Form, Input, Button, Checkbox, Col, Row } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 function LoginForm(props) {
@@ -28,52 +29,63 @@ function LoginForm(props) {
   }
 
   return (
-    <Grid textAlign='center' style={{ height: '85vh' }} verticalAlign='middle'>
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Image src={logo} textAlign='center' style={{ marginRight: "auto", marginLeft: "auto" }} />
-        <br />
-        <Form name="normal_login" className="login-form" onFinish={handleLogin} >
-          <Segment textAlign='right' >
-            <Form.Item
-              name="username"
-              {...username}
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your E-mail address!',
-                },
-              ]}
-            >
-              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              {...password}
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your Password!',
-                },
-              ]}
-            >
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder="Password"
-              />
-            </Form.Item>
-            <Form.Item>
-              <Button type="primary" htmlType="submit" className="login-form-button">
-                Log in
+    <Row align="middle" style={{ marginTop: "20vh" }}>
+      <Col span={8}></Col>
+      <Col span={8}>
+        <Row>
+          <Col span={8}></Col>
+          <Col span={8}>
+            <img src={logo} />
+          </Col>
+          <Col span={8}></Col>
+        </Row>
+        <Row>
+          <Col span={24}>
+            <Form name="normal_login" className="login-form" onFinish={handleLogin} >
+              <Segment textAlign='right' >
+                <Form.Item
+                  name="username"
+                  {...username}
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your E-mail address!',
+                    },
+                  ]}
+                >
+                  <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                </Form.Item>
+                <Form.Item
+                  name="password"
+                  {...password}
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your Password!',
+                    },
+                  ]}
+                >
+                  <Input
+                    prefix={<LockOutlined className="site-form-item-icon" />}
+                    type="password"
+                    placeholder="Password"
+                  />
+                </Form.Item>
+                <Form.Item>
+                  <Button type="primary" htmlType="submit" className="login-form-button">
+                    Log in
               </Button>
-            </Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-          </Segment>
-        </Form>
-      </Grid.Column>
-    </Grid>
+                </Form.Item>
+                <Form.Item name="remember" valuePropName="checked" noStyle>
+                  <Checkbox>Remember me</Checkbox>
+                </Form.Item>
+              </Segment>
+            </Form>
+          </Col>
+        </Row>
+      </Col>
+      <Col span={8}></Col>
+    </Row >
   )
 }
 

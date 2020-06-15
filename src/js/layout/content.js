@@ -2,7 +2,7 @@ import React from 'react';
 import CreateUser from '../user_management/create.js'
 import Container from '../user_management/view.js'
 
-function Content() {
+function Contentbar() {
     if (window.location.pathname === "/create" || window.location.pathname === "/edit") {
         return (<CreateUser />)
     } else {
@@ -10,4 +10,4 @@ function Content() {
     }
 }
 
-export default Content;
+export default Contentbar;

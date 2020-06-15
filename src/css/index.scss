@@ -1,5 +1,6 @@
 $font: 'Heebo', 'lato', 'Helvetica Neue', sans-serif;
 $relier-green: #248e7b;
+$relier-green-hover: #5cccb7;
 $relier-white: #ffff;
 $relier-dark-gray: #A3A5A7;
 $relier-light-gray: #FCFCFC;
@@ -7,6 +8,7 @@ $relier-light-gray: #FCFCFC;
 body {
   margin: 0;
   font-family: $font;
+  overflow-y: hidden;
   
   .app-headbar {
       background-color: $relier-green;
@@ -21,18 +23,25 @@ body {
   }
 
   .app-content{
-    background-color: $relier-light-gray;
-    min-height: 100vh;
+    margin: 5vh;
   }
 
 }
 
 /* Component */
 /* button */
-.ui.button.green-button{
+.ant-btn-primary {
   background-color: $relier-green;
   color: $relier-white;
+  width: 100%;
 }
+.ant-btn-danger {
+  width: 100%;
+}
+.ant-btn-primary:hover {
+  background-color: $relier-green-hover;
+}
+
 
 /* Text */
 .white-text{
@@ -59,6 +68,18 @@ body {
 
 .add-five-padding-top{
   padding-top: 5vh;
+}
+
+.add-ten-padding-bottom{
+  padding-bottom: 10vh;
+}
+
+.add-eight-padding-bottom{
+  padding-bottom: 8vh;
+}
+
+.add-five-padding-bottom{
+  padding-bottom: 5vh;
 }
 
 .add-ten-margin-top{

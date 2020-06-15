@@ -1,5 +1,6 @@
 import photos from '../../picture/upload-photo.jpg';
-import { Button, Grid, Segment, Header, Form, Checkbox, Dropdown } from 'semantic-ui-react';
+import { Button, Input } from 'antd';
+import { Grid, Segment, Header, Form, Checkbox, Dropdown } from 'semantic-ui-react';
 import React from 'react';
 import axios from 'axios';
 import { urlAPI } from '../utils/API';
@@ -174,7 +175,7 @@ class CreateUser extends React.Component {
                           <Grid>
                             <Grid.Column width="12">
                               <label>Email *</label>
-                              <input
+                              <Input
                                 id="user_email"
                                 placeholder="Enter user company email"
                                 onChange={this.handleChange}
@@ -189,7 +190,7 @@ class CreateUser extends React.Component {
                         </Form.Field>
                         <Form.Field>
                           <label>Full Name *</label>
-                          <input
+                          <Input
                             id="fullname"
                             placeholder='Enter fullname'
                             onChange={this.handleChange}
@@ -234,7 +235,11 @@ class CreateUser extends React.Component {
                             </Grid.Column>
                           </Grid>
                         </Form.Field>
-                        <Button type='submit'>Save</Button>
+                        <Grid>
+                          <Grid.Column width="4">
+                            <Button type='primary'>Save</Button>
+                          </Grid.Column>
+                        </Grid>
                       </Form>
                     </Grid.Column>
                     <Grid.Column>
