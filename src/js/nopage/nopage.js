@@ -1,16 +1,29 @@
 import React from 'react';
 import logo from '../../picture/logo.PNG';
-import { Grid, Image } from 'semantic-ui-react'
+import { Row, Col } from 'antd';
 
 function NoPage() {
   return (
-    <Grid textAlign='center' style={{ height: '85vh' }} verticalAlign='middle'>
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Image src={logo} textAlign='center' style={{ marginRight: "auto", marginLeft: "auto" }} />
+    <Row align="middle" style={{ marginTop: "35vh" }}>
+      <Col span={8}></Col>
+      <Col span={8}>
+        <Row>
+          <Col span={8}></Col>
+          <Col span={8}>
+            <img src={logo} />
+          </Col>
+          <Col span={8}></Col>
+        </Row>
         <br />
-        <h2 className="white">404 Not Found</h2>
-      </Grid.Column>
-    </Grid>
+        <Row>
+          <Col span={6}></Col>
+          <Col span={12}>
+            <h2 className="white">404 Not Found</h2>
+          </Col>
+          <Col span={6}></Col>
+        </Row>
+      </Col>
+    </Row>
   )
 }
 
