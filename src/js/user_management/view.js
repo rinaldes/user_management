@@ -1,5 +1,4 @@
-import { Segment } from 'semantic-ui-react';
-import { Button, Input, Table, Space, Row, Col } from 'antd';
+import { Button, Input, Table, Space, Row, Col, Card } from 'antd';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { urlAPI } from "../utils/API";
@@ -123,7 +122,7 @@ class Container extends React.Component {
       })
     })
     return (
-      <Segment>
+      <Card>
         <Row className="add-five-margin-top">
           <Col span={1}></Col>
           <Col span={22}>
@@ -153,8 +152,7 @@ class Container extends React.Component {
           </Col>
           <Col span={1}></Col>
         </Row>
-        <br />
-      </Segment >
+      </Card >
     );
   }
 }

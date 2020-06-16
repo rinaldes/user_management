@@ -1,6 +1,5 @@
 import photos from '../../picture/upload-photo.jpg';
-import { Button, Input, Select, Switch, Row, Col, Form } from 'antd';
-import { Segment } from 'semantic-ui-react';
+import { Button, Input, Select, Switch, Row, Col, Form, Card } from 'antd';
 import React from 'react';
 import axios from 'axios';
 import { urlAPI } from '../utils/API';
@@ -156,7 +155,7 @@ class CreateUser extends React.Component {
     }
 
     return (
-      <Segment>
+      <Card>
         <Row className="add-five-margin-top">
           <Col span={1}></Col>
           <Col span={22}>
@@ -233,8 +232,7 @@ class CreateUser extends React.Component {
           </Col>
           <Col span={1}></Col>
         </Row>
-        <br />
-      </Segment >
+      </Card >
     );
   };
 }
