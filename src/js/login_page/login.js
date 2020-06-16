@@ -3,8 +3,7 @@ import logo from '../../picture/logo.PNG';
 import axios from 'axios';
 import '../../css/index.scss';
 import { setUserSession, urlAPI } from '../utils/API';
-import { Segment } from 'semantic-ui-react'
-import { Form, Input, Button, Checkbox, Col, Row } from 'antd';
+import { Form, Input, Button, Checkbox, Col, Row, Card } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 function LoginForm(props) {
@@ -42,7 +41,7 @@ function LoginForm(props) {
         <Row>
           <Col span={24}>
             <Form name="normal_login" className="login-form" onFinish={handleLogin} >
-              <Segment textAlign='right' >
+              <Card textAlign='right' >
                 <Form.Item
                   name="username"
                   {...username}
@@ -79,7 +78,7 @@ function LoginForm(props) {
                 <Form.Item name="remember" valuePropName="checked" noStyle>
                   <Checkbox>Remember me</Checkbox>
                 </Form.Item>
-              </Segment>
+              </Card>
             </Form>
           </Col>
         </Row>
