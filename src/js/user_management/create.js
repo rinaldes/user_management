@@ -1,6 +1,6 @@
 import photos from '../../picture/upload-photo.jpg';
-import { Button, Input, Radio, Select, Cascader, InputNumber, TreeSelect, Switch } from 'antd';
-import { Grid, Segment, Header, Form, Checkbox, Dropdown } from 'semantic-ui-react';
+import { Button, Input, Select, Switch, Row, Col, Form } from 'antd';
+import { Segment } from 'semantic-ui-react';
 import React from 'react';
 import axios from 'axios';
 import { urlAPI } from '../utils/API';
@@ -10,7 +10,6 @@ class CreateUser extends React.Component {
     super(props);
     const urlparameter = window.location.search;
     const params = new URLSearchParams(urlparameter);
-    console.log(params.get("code"))
     this.state = {
       code: params.get('code'),
       contactListAPI: [],
@@ -23,11 +22,7 @@ class CreateUser extends React.Component {
       corporate: "",
       jobrole: false,
       is_active: null,
-      dataUser: {},
-      roleList: [
-        { key: 'Ya', value: true, text: 'Ya' },
-        { key: 'Bukan', value: false, text: 'Bukan' },
-      ]
+      dataUser: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,26 +31,29 @@ class CreateUser extends React.Component {
 
   // Get Contact Data
   GetContact() {
-    axios.get(
-      urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + "/contacts",
-      {
-        headers:
-          { Authorization: "Bearer " + localStorage.getItem('token-access') }
-      })
-      .then(json => {
-        this.state.contactListAPI = [json.data.Data]
-        this.state.contactListAPI.map(contact => {
-          if (this.state.previous_uid !== contact.UID) {
-            this.state.contactList.push({
-              key: contact.UID,
-              value: contact.UID,
-              text: contact.Title,
-            })
-            this.state.previous_uid = contact.UID
-          }
+    setTimeout(function () { //Start the timer
+      axios.get(
+        urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + "/contacts",
+        {
+          headers:
+            { Authorization: "Bearer " + localStorage.getItem('token-access') }
         })
-        this.state.get_done = true
-      })
+        .then(json => {
+          this.state.contactListAPI = [json.data.Data]
+          this.state.contactListAPI.map(contact => {
+            if (this.state.previous_uid !== contact.UID) {
+              this.state.contactList.push({
+                key: contact.UID,
+                value: contact.UID,
+                text: contact.Title,
+              })
+              this.state.previous_uid = contact.UID
+            }
+          })
+          this.state.get_done = true
+        })
+    }.bind(this), 250)
+
   }
 
   // Get User Data
@@ -73,7 +71,7 @@ class CreateUser extends React.Component {
             get_done_user: true,
             email: response.data.Data.Email,
             fullname: response.data.Data.FullName,
-            jobrole: response.data.Data.IsAdministrator,
+            jobrole: false,
             corporate: localStorage.getItem("orgLogin"),
             is_active: response.data.Data.IsActive
           })
@@ -128,22 +126,22 @@ class CreateUser extends React.Component {
       this.setState({
         fullname: event.target.value
       });
-    } else if (event.target.id === "is_active") {
-      this.setState({
-        is_active: !this.state.is_active
-      });
     }
   }
 
+  handleChangeActive = (e, { value }) => {
+    this.setState({
+      is_active: !this.state.is_active
+    });
+  };
+
   handleChangeRole = (e, { value }) => {
-    e.persist();
     this.setState({
       jobrole: value
     });
   };
 
   handleChangeContact = (e, { value }) => {
-    e.persist();
     this.setState({
       corporate: value
     });
@@ -156,105 +154,85 @@ class CreateUser extends React.Component {
     if (this.state.get_done_user === false && window.location.pathname === "/edit") {
       this.GetUserData();
     }
+
     return (
       <Segment>
-        <Grid centered>
-          <Grid.Column width="14">
-            <Grid>
-              <Grid.Row className="add-five-margin-top">
-                <Grid.Column width="9" floated="left">
-                  <Header as="h1">{(window.location.pathname === "/create") ? "Add" : "Edit"} User</Header>
-                </Grid.Column>
-              </Grid.Row>
-              <Grid.Row className="add-eight-padding-top">
-                <Grid.Column>
-                  <Grid>
-                    <Grid.Column width="10">
-                      <Form onSubmit={this.handleSubmit}>
-                        <Form.Field>
-                          <Grid>
-                            <Grid.Column width="12">
-                              <label>Email *</label>
-                              <Input
-                                id="user_email"
-                                placeholder="Enter user company email"
-                                onChange={this.handleChange}
-                                value={this.state.email}
-                              />
-                            </Grid.Column>
-                            <Grid.Column width="4">
-                              <label>Sync LDAP</label><br />
-                              <Checkbox toggle />
-                            </Grid.Column>
-                          </Grid>
-                        </Form.Field>
-                        <Form.Field>
-                          <label>Full Name *</label>
-                          <Input
-                            id="fullname"
-                            placeholder='Enter fullname'
-                            onChange={this.handleChange}
-                            value={this.state.fullname}
-                          />
-                        </Form.Field>
-                        <Form.Field>
-                          <label>Corporate Contact</label>
-                          <Dropdown
-                            id="corporate_contact"
-                            placeholder='Choose Corporate Contact'
-                            fluid
-                            search
-                            selection
-                            options={this.state.contactList}
-                            onChange={this.handleChangeContact}
-                            value={this.state.corporate}
-                          />
-                        </Form.Field>
-                        <Form.Field>
-                          <Grid>
-                            <Grid.Column width="8">
-                              <label>Admin</label>
-                              <Dropdown
-                                id="role"
-                                placeholder='Choose Role'
-                                fluid
-                                search
-                                selection
-                                options={this.state.roleList}
-                                onChange={this.handleChangeRole}
-                                value={this.state.jobrole}
-                              />
-                            </Grid.Column>
-                            <Grid.Column width="8">
-                              <label>Active Status</label><br />
-                              <Checkbox
-                                toggle id="is_active"
-                                onChange={this.handleChange}
-                                checked={this.state.is_active}
-                              />
-                            </Grid.Column>
-                          </Grid>
-                        </Form.Field>
-                        <Grid>
-                          <Grid.Column width="4">
-                            <Button type='primary'>Save</Button>
-                          </Grid.Column>
-                        </Grid>
-                      </Form>
-                    </Grid.Column>
-                    <Grid.Column>
-                      <Grid centered>
-                        <Grid.Column width="8">
-                          <img src={photos} />
-                        </Grid.Column>
-                      </Grid>
-                    </Grid.Column>
-                  </Grid>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </Grid.Column>
-        </Grid>
+        <Row className="add-five-margin-top">
+          <Col span={1}></Col>
+          <Col span={22}>
+            <Row>
+              <Col span={24}><h1>{(window.location.pathname === "/create") ? "Add" : "Edit"} User</h1></Col>
+            </Row>
+            <Row className="add-five-padding-top">
+              <Col span={14}>
+                <Form layout="horizontal" >
+                  <Form.Item>
+                    <Row>
+                      <Col span={20}>
+                        <label>Email *</label>
+                        <Input onChange={this.handleChange}
+                          value={this.state.email}
+                          id="user_email" />
+                      </Col>
+                      <Col span={1}></Col>
+                      <Col span={3}>
+                        <label>Sync LDAP</label><br />
+                        <Switch /></Col>
+                    </Row>
+                  </Form.Item>
+                  <Form.Item>
+                    <label>Full Name</label>
+                    <Input onChange={this.handleChange}
+                      value={this.state.fullname}
+                      id="fullname" />
+                  </Form.Item>
+                  <Form.Item>
+                    <label>Corporate Contact</label>
+                    <Select onChange={this.handleChangeContact} value={this.state.corporate} id="corporate_contact">
+                      {
+                        this.state.contactListAPI.map(item => (
+                          <Select.Option value={item.UID}>{item.Title}</Select.Option>
+                        ))
+                      }
+                    </Select>
+                  </Form.Item>
+                  <Form.Item>
+                    <Row>
+                      <Col span={10}>
+                        <label>Admin</label>
+                        <Select onChange={this.handleChangeRole}
+                          value={this.state.jobrole}
+                          id="role">
+                          <Select.Option value={true}>Ya</Select.Option>
+                          <Select.Option value={false}>Bukan</Select.Option>
+                        </Select>
+                      </Col>
+                      <Col span={1}></Col>
+                      <Col span={8}>
+                        <label>Active Status</label><br />
+                        <Switch onChange={this.handleChangeActive}
+                          checked={this.state.is_active}
+                          id="is_active" />
+                      </Col>
+                    </Row>
+                  </Form.Item>
+                  <Form.Item>
+                    <Row>
+                      <Col span={4}>
+                        <Button type='primary' onClick={this.handleSubmit}>Save</Button>
+                      </Col>
+                    </Row>
+                  </Form.Item>
+                </Form>
+              </Col>
+              <Col span={2}></Col>
+              <Col span={8}>
+                <img src={photos} />
+              </Col>
+            </Row>
+          </Col>
+          <Col span={1}></Col>
+        </Row>
         <br />
       </Segment >
     );
