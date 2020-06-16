@@ -13,21 +13,21 @@ function Container() {
   const data = [];
 
   useEffect(() => {
-    let user_keyword = "/users"
-    if (search_item != null && search_item != 0) {
-      user_keyword += "?keyword=" + search_item
+    if (get_done === false) {
+      let user_keyword = "/users"
+      if (search_item != null && search_item != 0) {
+        user_keyword += "?keyword=" + search_item
+      }
+      axios.get(
+        urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + user_keyword,
+        {
+          headers:
+            { Authorization: "Bearer " + localStorage.getItem('token-access') }
+        })
+        .then(res => {
+          setUser_list(res.data.Data)
+        })
     }
-    axios.get(
-      urlAPI + "restricted/orgs/" + localStorage.getItem('orgLogin') + user_keyword,
-      {
-        headers:
-          { Authorization: "Bearer " + localStorage.getItem('token-access') }
-      })
-      .then(res => {
-        setUser_list(res.data.Data)
-        console.log("cehcehche")
-        console.log(user_list)
-      })
     setGet_done(true);
   });
 
