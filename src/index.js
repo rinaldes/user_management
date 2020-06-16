@@ -4,7 +4,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
 // Import CSS
-import 'semantic-ui-css/semantic.min.css'
 import 'antd/dist/antd.css'
 import './css/index.scss';
 

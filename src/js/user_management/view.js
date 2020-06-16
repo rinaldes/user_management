@@ -1,9 +1,10 @@
-import { Button, Input, Table, Space, Row, Col, Card } from 'antd';
+import { Button, Input, Table, Space, Row, Col, Card, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { urlAPI } from "../utils/API";
 import axios from "axios";
 const { Search } = Input;
+const { Title } = Typography;
 
 class Container extends React.Component {
   constructor(props) {
@@ -127,7 +128,7 @@ class Container extends React.Component {
           <Col span={1}></Col>
           <Col span={22}>
             <Row>
-              <Col span={14}><h1>User List</h1></Col>
+              <Col span={14}><Title level={2}>User List</Title ></Col>
               <Col span={10}>
                 <Row>
                   <Col span={14}>

@@ -1,8 +1,9 @@
 import photos from '../../picture/upload-photo.jpg';
-import { Button, Input, Select, Switch, Row, Col, Form, Card } from 'antd';
+import { Button, Input, Select, Switch, Row, Col, Typography, Form, Card } from 'antd';
 import React from 'react';
 import axios from 'axios';
 import { urlAPI } from '../utils/API';
+const { Title } = Typography;
 
 class CreateUser extends React.Component {
   constructor(props) {
@@ -160,7 +161,7 @@ class CreateUser extends React.Component {
           <Col span={1}></Col>
           <Col span={22}>
             <Row>
-              <Col span={24}><h1>{(window.location.pathname === "/create") ? "Add" : "Edit"} User</h1></Col>
+              <Col span={24}><Title level={2}>{(window.location.pathname === "/create") ? "Add" : "Edit"} User</Title></Col>
             </Row>
             <Row className="add-five-padding-top">
               <Col span={14}>
